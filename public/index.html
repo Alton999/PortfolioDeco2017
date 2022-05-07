@@ -8,6 +8,133 @@
 	</head>
 
 	<body>
-		<script src="script.js"></script>
+		<main>
+			<!-- Section that shows the different tasks that you have created -->
+			<section id="taskViewer">
+				<h1>Task Viewer</h1>
+				<!-- Section containing the container of tasks -->
+
+				<section id="tasksContainer">
+					<!-- Container of the card -->
+					<div id="newTasks">
+						<p id="emptyListText">You have not added any tasks yet.</p>
+						<ul id="taskList">
+							<!-- Indivial task card -->
+							<li class="taskListItem">
+								<div class="taskTags">
+									<span class="taskTag">Easy</span>
+									<span class="taskTag">High Priority</span>
+								</div>
+
+								<div class="taskDetails">
+									<ul>
+										<li>
+											<p class="label">Task Name:</p>
+											<p>Description</p>
+										</li>
+										<li>
+											<p class="label">Subject:</p>
+											<p>Description</p>
+										</li>
+										<li>
+											<p class="label">Date Created:</p>
+											<p>Description</p>
+										</li>
+										<li>
+											<p class="label">Estimated Duration:</p>
+											<p>Description</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Task modal to add a new task -->
+				<section id="addTaskForm">
+					<form action="" id="taskForm">
+						<ul>
+							<li>
+								<label for="taskName">Task Name</label>
+								<input
+									type="text"
+									id="taskName"
+									placeholder="Enter the task name"
+									required
+								/>
+							</li>
+							<li>
+								<label for="priority">Priority</label>
+								<select name="priority" id="priority">
+									<option value="low">Low Priority</option>
+									<option value="medium">Medium Priority</option>
+									<option value="high">High Priority</option>
+								</select>
+							</li>
+
+							<li>
+								<label for="difficulty">Difficulty</label>
+								<select name="difficulty" id="difficulty">
+									<option value="easy">Easy</option>
+									<option value="medium">Medium</option>
+									<option value="hard">Hard</option>
+								</select>
+							</li>
+
+							<li>
+								<label for="subject">Subject</label>
+								<input
+									type="text"
+									id="subject"
+									placeholder="Enter the subject"
+									required
+								/>
+							</li>
+
+							<li>
+								<p>Estimated Duration:</p>
+								<ul>
+									<li>
+										<input
+											type="number"
+											id="hours"
+											min="0"
+											max="24"
+											placeholder="Hours"
+											required
+										/>
+									</li>
+									<li>
+										<input
+											type="number"
+											id="minutes"
+											min="10"
+											max="60"
+											placeholder="Minutes"
+											required
+										/>
+									</li>
+								</ul>
+							</li>
+
+							<li>
+								<label for="description">Description</label>
+								<input
+									type="textarea"
+									id="description"
+									placeholder="Enter your project description"
+								/>
+							</li>
+						</ul>
+						<div>
+							<button type="submit">Add Task</button>
+						</div>
+					</form>
+				</section>
+			</section>
+		</main>
+
+		<script src="script.js" type="module"></script>
 	</body>
 </html>

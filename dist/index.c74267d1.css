@@ -1,3 +1,18 @@
+@import "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@1,700&display=swap";
+* {
+  font-family: Montserrat, sans-serif;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 200;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   line-height: 1.15;
@@ -9,11 +24,6 @@ body {
 
 main {
   display: block;
-}
-
-h1 {
-  margin: .67em 0;
-  font-size: 2em;
 }
 
 hr {
@@ -150,6 +160,69 @@ summary {
 
 template, [hidden] {
   display: none;
+}
+
+main {
+  padding: 2em 4em;
+}
+
+#addTaskForm form {
+  width: 80%;
+  box-sizing: border-box;
+}
+
+#addTaskForm ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+#addTaskForm li, #addTaskForm li > ul {
+  align-items: center;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+#addTaskForm li > ul {
+  justify-content: space-between;
+  margin: 0;
+}
+
+#addTaskForm li label, #addTaskForm li p {
+  max-width: 200px;
+  flex: 1 0 120px;
+}
+
+#addTaskForm li input, #addTaskForm li select {
+  flex: 3 0 120px;
+  padding: 1em .5em;
+}
+
+#addTaskForm div {
+  justify-content: flex-end;
+  display: flex;
+}
+
+#addTaskForm button {
+  padding: 1em 2em;
+}
+
+#taskViewer #taskList {
+  list-style-type: none;
+}
+
+#taskViewer #taskList .taskListItem .taskDetails > ul > li {
+  align-items: center;
+  display: flex;
+}
+
+#taskViewer #taskList .taskListItem .taskDetails > ul > li p {
+  font-size: 18px;
+}
+
+#taskViewer #taskList .taskListItem .taskDetails > ul > li .label {
+  max-width: 240px;
+  flex: 1 0 80px;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=index.c74267d1.css.map */

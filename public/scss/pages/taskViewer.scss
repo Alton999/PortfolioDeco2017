@@ -1,0 +1,71 @@
+//File for task viewer
+
+//Form styling
+#addTaskForm {
+	form {
+		width: 80%;
+		box-sizing: border-box;
+	}
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+	li,
+	li > ul {
+		display: flex;
+		align-items: center;
+		margin-bottom: 20px;
+	}
+
+	li > ul {
+		justify-content: space-between;
+		margin: 0;
+	}
+
+	li {
+		label,
+		p {
+			flex: 1 0 120px;
+			max-width: 200px;
+		}
+
+		input,
+		select {
+			flex: 3 0 120px;
+			padding: 1em 0.5em;
+		}
+	}
+
+	// button container and styling
+	div {
+		display: flex;
+		justify-content: flex-end;
+	}
+	button {
+		padding: 1em 2em;
+	}
+}
+
+// Task list styling
+#taskViewer {
+	// Ul ID for task list container
+	#taskList {
+		list-style-type: none;
+
+		// Individual list items (task card)
+		.taskListItem {
+			.taskDetails > ul > li {
+				display: flex;
+				align-items: center;
+				p {
+					font-size: 18px;
+				}
+				.label {
+					font-weight: 600;
+					flex: 1 0 80px;
+					max-width: 240px;
+				}
+			}
+		}
+	}
+}
