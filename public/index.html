@@ -17,16 +17,20 @@
 				<section id="tasksContainer">
 					<!-- Container of the card -->
 					<div id="newTasks">
-						<p id="emptyListText">You have not added any tasks yet.</p>
-						<ul id="taskList">
-							<!-- Indivial task card -->
-							<li class="taskListItem">
-								<div class="taskTags">
-									<span class="taskTag">Easy</span>
-									<span class="taskTag">High Priority</span>
-								</div>
+						<div class="taskContainerHeader">
+							<hr class="underlineGlow"></hr>
+							<h3>New Tasks</h3>
+						</div>
 
+						<ul id="taskList">
+							<p id="emptyListText">You have not added any tasks yet.</p>
+							<!-- Indivial task card -->
+							<!-- <li class="taskListItem">
 								<div class="taskDetails">
+									<div class="taskTags">
+										<span class="taskTag green">Easy</span>
+										<span class="taskTag red">High Priority</span>
+									</div>
 									<ul>
 										<li>
 											<p class="label">Task Name:</p>
@@ -46,14 +50,20 @@
 										</li>
 									</ul>
 								</div>
-							</li>
+							</li> -->
 						</ul>
+						<button id="openNewTaskButton">Add New Task</button>
 					</div>
 				</section>
 
 				<!-- Task modal to add a new task -->
-				<section id="addTaskForm">
-					<form action="" id="taskForm">
+				<section id="addTaskForm" class="modal" >
+					
+					<form id="taskForm" class="modal-content">
+						<div class="taskFormHeader">
+							<h4>Fill in details to add new task</h4>
+							<span class="close">&times;</span>
+						</div>
 						<ul>
 							<li>
 								<label for="taskName">Task Name</label>
@@ -61,24 +71,25 @@
 									type="text"
 									id="taskName"
 									placeholder="Enter the task name"
+									maxlength="40"
 									required
 								/>
 							</li>
 							<li>
 								<label for="priority">Priority</label>
 								<select name="priority" id="priority">
-									<option value="low">Low Priority</option>
-									<option value="medium">Medium Priority</option>
-									<option value="high">High Priority</option>
+									<option value="Low Priority">Low Priority</option>
+									<option value="Medium Priority">Medium Priority</option>
+									<option value="High Priority">High Priority</option>
 								</select>
 							</li>
 
 							<li>
 								<label for="difficulty">Difficulty</label>
 								<select name="difficulty" id="difficulty">
-									<option value="easy">Easy</option>
-									<option value="medium">Medium</option>
-									<option value="hard">Hard</option>
+									<option value="Easy">Easy</option>
+									<option value="Medium">Medium</option>
+									<option value="Hard">Hard</option>
 								</select>
 							</li>
 
@@ -88,6 +99,7 @@
 									type="text"
 									id="subject"
 									placeholder="Enter the subject"
+									maxlength="40"
 									required
 								/>
 							</li>
@@ -109,7 +121,7 @@
 										<input
 											type="number"
 											id="minutes"
-											min="10"
+											min="0"
 											max="60"
 											placeholder="Minutes"
 											required
@@ -121,13 +133,13 @@
 							<li>
 								<label for="description">Description</label>
 								<input
-									type="textarea"
+									type="text"
 									id="description"
 									placeholder="Enter your project description"
 								/>
 							</li>
 						</ul>
-						<div>
+						<div class="submitContainer">
 							<button type="submit">Add Task</button>
 						</div>
 					</form>

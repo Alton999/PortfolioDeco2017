@@ -13,6 +13,12 @@ h2 {
   font-weight: 200;
 }
 
+h3 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 400;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   line-height: 1.15;
@@ -162,13 +168,81 @@ template, [hidden] {
   display: none;
 }
 
+.modal {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: #0006;
+  animation-name: fadeIn;
+  animation-duration: .4s;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}
+
+.modal .modal-content {
+  width: 100%;
+  background-color: #fefefe;
+  animation-name: slideIn;
+  animation-duration: .4s;
+  position: fixed;
+  bottom: 0;
+}
+
+.modal .taskFormHeader {
+  height: 120px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.modal .taskFormHeader h4 {
+  font-size: 24px;
+}
+
+.modal .taskFormHeader .close {
+  color: #000;
+  font-size: 42px;
+  font-weight: bold;
+}
+
+.modal .taskFormHeader .close:hover, .modal .taskFormHeader .close:focus {
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    bottom: -300px;
+  }
+
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 main {
   padding: 2em 4em;
 }
 
 #addTaskForm form {
-  width: 80%;
   box-sizing: border-box;
+  padding: 0 120px 60px;
 }
 
 #addTaskForm ul {
@@ -197,31 +271,113 @@ main {
   padding: 1em .5em;
 }
 
-#addTaskForm div {
+#addTaskForm .submitContainer {
   justify-content: flex-end;
   display: flex;
 }
 
-#addTaskForm button {
+#addTaskForm .submitContainer button {
   padding: 1em 2em;
 }
 
-#taskViewer #taskList {
+#taskViewer #newTasks {
+  width: 33%;
+  color: #fff;
+  min-height: 80vh;
+  background-color: #34495ee6;
+  border-radius: 15px;
+  flex-direction: column;
+  display: flex;
+  box-shadow: 0 6px 12px -2px #32325d40, 0 3px 7px -3px #0000004d;
+}
+
+#taskViewer #newTasks button {
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#taskViewer #newTasks ul {
+  margin: 0;
+  padding: 0;
+}
+
+#taskViewer #newTasks .taskContainerHeader {
+  text-align: center;
+  background-color: #2c3e50;
+}
+
+#taskViewer #newTasks .taskContainerHeader .underlineGlow {
+  width: 70%;
+  height: 12px;
+  background: linear-gradient(to right, #c0392b, #ba2121);
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+#taskViewer #newTasks .taskContainerHeader h3 {
+  padding: 20px 40px;
+}
+
+#taskViewer #newTasks #openNewTaskButton {
+  margin-top: auto;
+}
+
+#taskViewer #newTasks #emptyListText {
+  margin: 30px;
+}
+
+#taskViewer #newTasks #taskList {
   list-style-type: none;
 }
 
-#taskViewer #taskList .taskListItem .taskDetails > ul > li {
+#taskViewer #newTasks #taskList .taskListItem {
+  width: 80%;
+  background-color: #2c3e50;
+  border-radius: 15px;
+  margin: 30px auto;
+  padding: 30px 30px 15px;
+}
+
+#taskViewer #newTasks #taskList .taskListItem .taskTags {
+  height: 100%;
+  margin-bottom: 15px;
+}
+
+#taskViewer #newTasks #taskList .taskListItem .taskTags span {
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 5px 20px;
+  font-size: .8em;
+}
+
+#taskViewer #newTasks #taskList .taskListItem .taskTags .taskTag.green {
+  background-color: #27ae60;
+}
+
+#taskViewer #newTasks #taskList .taskListItem .taskTags .taskTag.orange {
+  background-color: #e67e22;
+}
+
+#taskViewer #newTasks #taskList .taskListItem .taskTags .taskTag.red {
+  background-color: #c0392b;
+}
+
+#taskViewer #newTasks #taskList .taskListItem .taskDetails > ul > li {
   align-items: center;
+  margin-bottom: 0;
+  line-height: .5;
   display: flex;
 }
 
-#taskViewer #taskList .taskListItem .taskDetails > ul > li p {
-  font-size: 18px;
+#taskViewer #newTasks #taskList .taskListItem .taskDetails > ul > li p {
+  font-size: 14px;
 }
 
-#taskViewer #taskList .taskListItem .taskDetails > ul > li .label {
-  max-width: 240px;
-  flex: 1 0 80px;
+#taskViewer #newTasks #taskList .taskListItem .taskDetails > ul > li .label {
+  max-width: 160px;
+  flex: 1 0 30px;
   font-weight: 600;
 }
 

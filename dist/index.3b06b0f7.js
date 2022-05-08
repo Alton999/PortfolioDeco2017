@@ -527,8 +527,9 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"2OD7o":[function(require,module,exports) {
 var _tasklistComponent = require("./components/tasklistComponent");
+var _addTaskModalComponent = require("./components/addTaskModalComponent");
 
-},{"./components/tasklistComponent":"ghcfo"}],"ghcfo":[function(require,module,exports) {
+},{"./components/tasklistComponent":"ghcfo","./components/addTaskModalComponent":"1Xjui"}],"ghcfo":[function(require,module,exports) {
 // Creating a add task function
 // Initialise inputs from HTML (Add task list functionality)
 const addTaskForm = document.getElementById("taskForm");
@@ -564,12 +565,11 @@ addTaskForm.addEventListener("submit", (e)=>{
 const createTaskObject = (taskName, priority, difficulty, subject, hours, minutes, description)=>{
     let currentDate = new Date();
     let day = currentDate.getDate().toString();
-    let month = currentDate.getMonth().toString();
+    let month = (currentDate.getMonth() + 1).toString();
     let year = currentDate.getFullYear().toString();
-    // console.log(day, month, year);
     return {
         id: Date.now(),
-        createdDate: day + "/" + month + "/" + year,
+        createdDate: day + " / " + month + " / " + year,
         taskName,
         priority,
         difficulty,
@@ -579,15 +579,16 @@ const createTaskObject = (taskName, priority, difficulty, subject, hours, minute
     };
 };
 // Renders the current new task to the DOM
-const renderTasks = (task1)=>{
+const renderTasks = (task)=>{
     updateEmpty();
     let item = document.createElement("li");
-    item.setAttribute("data-id", task1.id);
+    item.setAttribute("data-id", task.id);
     // Add the css class to the item container
     item.classList.add("taskListItem");
     // item.innerHTML = "<p>" + task.taskName + "</p>";
     // Create task tags div
     let taskTagsDiv = document.createElement("div");
+    taskTagsDiv.className += "taskTags";
     // Create task details container
     let taskDetailsContainer = document.createElement("div");
     taskDetailsContainer.classList.add("taskDetails");
@@ -596,43 +597,65 @@ const renderTasks = (task1)=>{
 		<ul>
 			<li>
 				<p class="label">Task Name:</p>
-				<p>${task1.taskName}</p>
+				<p>${task.taskName}</p>
 			</li>
 			<li>
 				<p class="label">Subject:</p>
-				<p>${task1.subject}</p>
+				<p>${task.subject}</p>
 			</li>
 			<li>
 				<p class="label">Date Created:</p>
-				<p>${task1.createdDate}</p>
+				<p>${task.createdDate}</p>
 			</li>
 			<li>
 				<p class="label">Estimated Duration:</p>
-				<p>${task1.estimatedDuration}</p>
+				<p>${task.estimatedDuration}</p>
 			</li>
 		</ul>
 	`;
     // Creating the functionality for displaying the tags of priority and difficulty
+    // Create 2 spans to and check the value of each. add class name green, orange or red to change tag color
+    let difficultyTag = document.createElement("span");
+    let priorityTag = document.createElement("span");
+    // Create the text node for the span
+    let difficultyTagText = document.createTextNode(task.difficulty);
+    let priorityTagText = document.createTextNode(task.priority);
+    // Add initial class to spans
+    difficultyTag.classList.add("taskTag");
+    priorityTag.classList.add("taskTag");
+    // Append text nodes to span
+    difficultyTag.appendChild(difficultyTagText);
+    priorityTag.appendChild(priorityTagText);
+    // Depending on the colour add classname to spans
+    // Difficulty
+    if (task.difficulty === "Easy") difficultyTag.classList.add("green");
+    else if (task.difficulty === "Medium") difficultyTag.classList.add("orange");
+    else difficultyTag.classList.add("red");
+    // Priority
+    if (task.priority === "Low Priority") priorityTag.classList.add("green");
+    else if (task.priority === "Medium Priority") priorityTag.classList.add("orange");
+    else priorityTag.classList.add("red");
+    taskTagsDiv.appendChild(difficultyTag);
+    taskTagsDiv.appendChild(priorityTag);
     // Append the tags into the tasktags div
     item.appendChild(taskTagsDiv);
     item.appendChild(taskDetailsContainer);
     taskListContainer.appendChild(item);
     // Creating a delete button associated with specific task
-    let delButton = document.createElement("button");
-    let delButtonText = document.createTextNode("Delete Task");
-    delButton.appendChild(delButtonText);
-    item.append(delButton);
-    // Event listener for additional dom elements
-    delButton.addEventListener("click", (e)=>{
-        e.preventDefault();
-        let id = e.target.parentElement.getAttribute("data-id");
-        let index = taskListArray.findIndex((task)=>task.id === Number(id)
-        );
-        removeItemFromArray(taskListArray, index);
-        item.remove();
-        console.log(taskListArray);
-        updateEmpty();
-    });
+    // let delButton = document.createElement("button");
+    // let delButtonText = document.createTextNode("Delete Task");
+    // delButton.appendChild(delButtonText);
+    // item.append(delButton);
+    // // Event listener for additional dom elements
+    // delButton.addEventListener("click", (e) => {
+    // 	e.preventDefault();
+    // 	let id = e.target.parentElement.getAttribute("data-id");
+    // 	let index = taskListArray.findIndex((task) => task.id === Number(id));
+    // 	removeItemFromArray(taskListArray, index);
+    // 	item.remove();
+    // 	console.log(taskListArray);
+    // 	updateEmpty();
+    // });
     addTaskForm.reset();
 };
 const removeItemFromArray = (arr, index)=>{
@@ -643,6 +666,27 @@ const updateEmpty = ()=>{
     if (taskListArray.length > 0) document.getElementById("emptyListText").style.display = "none";
     else document.getElementById("emptyListText").style.display = "block";
 };
+const capitaliseFirstLetter = (inputString)=>{
+    return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+};
+
+},{}],"1Xjui":[function(require,module,exports) {
+// Modal components for add Task
+let addTaskModal = document.getElementById("addTaskForm");
+let addTaskModalOpen = document.getElementById("openNewTaskButton");
+let closeBtn = document.getElementsByClassName("close")[0];
+addTaskModalOpen.onclick = ()=>{
+    console.log("Button clicked");
+    console.log(addTaskModal);
+    addTaskModal.style.display = "block";
+};
+closeBtn.onclick = ()=>{
+    addTaskModal.style.display = "none";
+};
+window.onclick = (e)=>{
+    if (e.target === addTaskModal) addTaskModal.style.display = "none";
+};
+console.log("Page loaded");
 
 },{}]},["2xDT7","2OD7o"], "2OD7o", "parcelRequire5724")
 
