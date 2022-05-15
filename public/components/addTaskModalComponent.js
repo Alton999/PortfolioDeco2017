@@ -5,8 +5,6 @@ let addTaskModalOpen = document.getElementById("openNewTaskButton");
 let closeBtn = document.getElementsByClassName("close")[0];
 
 addTaskModalOpen.onclick = () => {
-	console.log("Button clicked");
-	console.log(addTaskModal);
 	addTaskModal.style.display = "block";
 };
 
@@ -19,5 +17,3 @@ window.onclick = (e) => {
 		addTaskModal.style.display = "none";
 	}
 };
-
-console.log("Page loaded");

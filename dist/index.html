@@ -16,13 +16,13 @@
 
 				<section id="tasksContainer">
 					<!-- Container of the card -->
-					<div id="newTasks">
+					<div class="taskCardsContainer">
 						<div class="taskContainerHeader">
-							<hr class="underlineGlow">
+							<hr class="underlineGlow newTasks">
 							<h3>New Tasks</h3>
 						</div>
 
-						<ul id="taskList">
+						<ul id="taskListNew">
 							<p id="emptyListText">You have not added any tasks yet.</p>
 							<!-- Indivial task card -->
 							<!-- <li class="taskListItem">
@@ -53,6 +53,30 @@
 							</li> -->
 						</ul>
 						<button id="openNewTaskButton">Add New Task</button>
+					</div>
+					<div class="taskCardsContainer">
+						<div class="taskContainerHeader">
+							<hr class="underlineGlow">
+							<h3>In Progress</h3>
+						</div>
+
+						<ul id="taskListProgress">
+							<p id="emptyListText">You have not added any tasks yet.</p>
+							<!-- Indivial task card -->
+						
+						</ul>
+					</div>
+					<div class="taskCardsContainer">
+						<div class="taskContainerHeader">
+							<hr class="underlineGlow">
+							<h3>Completed</h3>
+						</div>
+
+						<ul id="taskListCompleted">
+							<p id="emptyListText">You have not added any tasks yet.</p>
+							<!-- Indivial task card -->
+						
+						</ul>
 					</div>
 				</section>
 
@@ -96,10 +120,10 @@
 								<p>Estimated Duration:</p>
 								<ul>
 									<li>
-										<input type="number" id="hours" min="0" max="24" placeholder="Hours" required="">
+										<input type="number" id="hours" min="0" max="24" placeholder="Hrs" required="">
 									</li>
 									<li>
-										<input type="number" id="minutes" min="0" max="60" placeholder="Minutes" required="">
+										<input type="number" id="minutes" min="0" max="60" placeholder="Mins" required="">
 									</li>
 								</ul>
 							</li>

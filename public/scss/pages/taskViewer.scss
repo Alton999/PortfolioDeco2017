@@ -18,8 +18,8 @@
 	}
 
 	li > ul {
-		justify-content: space-between;
 		margin: 0;
+		display: flex;
 	}
 
 	li {
@@ -28,11 +28,15 @@
 			flex: 1 0 120px;
 			max-width: 200px;
 		}
-
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
 		input,
 		select {
 			flex: 3 0 120px;
-			padding: 1em 0.5em;
+			padding: 1em 2em;
 		}
 	}
 
@@ -48,8 +52,12 @@
 
 // Task list styling
 #taskViewer {
+	#tasksContainer {
+		display: flex;
+		justify-content: space-between;
+	}
 	// Ul ID for task list container
-	#newTasks {
+	.taskCardsContainer {
 		// Open modal button styling
 		button {
 			padding: 15px 30px;
@@ -72,7 +80,7 @@
 		}
 		.taskContainerHeader {
 			text-align: center;
-			.underlineGlow {
+			.underlineGlow.newTasks {
 				width: 70%;
 				height: 12px;
 				border: none;
@@ -95,9 +103,24 @@
 		#emptyListText {
 			margin: 30px;
 		}
-		#taskList {
+		#taskListNew,
+		#taskListProgress,
+		#taskListCompleted {
 			list-style-type: none;
-
+			.delButton {
+				background: none;
+				cursor: pointer;
+				color: #c0392b;
+				border: none;
+				border-radius: 5px;
+				width: 100%;
+				transition: 0.5s;
+				margin-top: 10px;
+				&:hover {
+					background-color: #c0392b;
+					color: white;
+				}
+			}
 			// Individual list items (task card)
 			.taskListItem {
 				background-color: #2c3e50;

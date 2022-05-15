@@ -257,8 +257,8 @@ main {
 }
 
 #addTaskForm li > ul {
-  justify-content: space-between;
   margin: 0;
+  display: flex;
 }
 
 #addTaskForm li label, #addTaskForm li p {
@@ -266,9 +266,14 @@ main {
   flex: 1 0 120px;
 }
 
+#addTaskForm li input::-webkit-outer-spin-button, #addTaskForm li input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #addTaskForm li input, #addTaskForm li select {
   flex: 3 0 120px;
-  padding: 1em .5em;
+  padding: 1em 2em;
 }
 
 #addTaskForm .submitContainer {
@@ -280,7 +285,12 @@ main {
   padding: 1em 2em;
 }
 
-#taskViewer #newTasks {
+#taskViewer #tasksContainer {
+  justify-content: space-between;
+  display: flex;
+}
+
+#taskViewer .taskCardsContainer {
   width: 33%;
   color: #fff;
   min-height: 80vh;
@@ -291,23 +301,23 @@ main {
   box-shadow: 0 6px 12px -2px #32325d40, 0 3px 7px -3px #0000004d;
 }
 
-#taskViewer #newTasks button {
+#taskViewer .taskCardsContainer button {
   padding: 15px 30px;
   font-size: 16px;
   font-weight: 600;
 }
 
-#taskViewer #newTasks ul {
+#taskViewer .taskCardsContainer ul {
   margin: 0;
   padding: 0;
 }
 
-#taskViewer #newTasks .taskContainerHeader {
+#taskViewer .taskCardsContainer .taskContainerHeader {
   text-align: center;
   background-color: #2c3e50;
 }
 
-#taskViewer #newTasks .taskContainerHeader .underlineGlow {
+#taskViewer .taskCardsContainer .taskContainerHeader .underlineGlow.newTasks {
   width: 70%;
   height: 12px;
   background: linear-gradient(to right, #c0392b, #ba2121);
@@ -316,23 +326,39 @@ main {
   margin: 0 auto;
 }
 
-#taskViewer #newTasks .taskContainerHeader h3 {
+#taskViewer .taskCardsContainer .taskContainerHeader h3 {
   padding: 20px 40px;
 }
 
-#taskViewer #newTasks #openNewTaskButton {
+#taskViewer .taskCardsContainer #openNewTaskButton {
   margin-top: auto;
 }
 
-#taskViewer #newTasks #emptyListText {
+#taskViewer .taskCardsContainer #emptyListText {
   margin: 30px;
 }
 
-#taskViewer #newTasks #taskList {
+#taskViewer .taskCardsContainer #taskListNew, #taskViewer .taskCardsContainer #taskListProgress, #taskViewer .taskCardsContainer #taskListCompleted {
   list-style-type: none;
 }
 
-#taskViewer #newTasks #taskList .taskListItem {
+#taskViewer .taskCardsContainer #taskListNew .delButton, #taskViewer .taskCardsContainer #taskListProgress .delButton, #taskViewer .taskCardsContainer #taskListCompleted .delButton {
+  cursor: pointer;
+  color: #c0392b;
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: all .5s;
+}
+
+#taskViewer .taskCardsContainer #taskListNew .delButton:hover, #taskViewer .taskCardsContainer #taskListProgress .delButton:hover, #taskViewer .taskCardsContainer #taskListCompleted .delButton:hover {
+  color: #fff;
+  background-color: #c0392b;
+}
+
+#taskViewer .taskCardsContainer #taskListNew .taskListItem, #taskViewer .taskCardsContainer #taskListProgress .taskListItem, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem {
   width: 80%;
   background-color: #2c3e50;
   border-radius: 15px;
@@ -340,42 +366,42 @@ main {
   padding: 30px 30px 15px;
 }
 
-#taskViewer #newTasks #taskList .taskListItem .taskTags {
+#taskViewer .taskCardsContainer #taskListNew .taskListItem .taskTags, #taskViewer .taskCardsContainer #taskListProgress .taskListItem .taskTags, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem .taskTags {
   height: 100%;
   margin-bottom: 15px;
 }
 
-#taskViewer #newTasks #taskList .taskListItem .taskTags span {
+#taskViewer .taskCardsContainer #taskListNew .taskListItem .taskTags span, #taskViewer .taskCardsContainer #taskListProgress .taskListItem .taskTags span, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem .taskTags span {
   border-radius: 5px;
   margin-right: 10px;
   padding: 5px 20px;
   font-size: .8em;
 }
 
-#taskViewer #newTasks #taskList .taskListItem .taskTags .taskTag.green {
+#taskViewer .taskCardsContainer #taskListNew .taskListItem .taskTags .taskTag.green, #taskViewer .taskCardsContainer #taskListProgress .taskListItem .taskTags .taskTag.green, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem .taskTags .taskTag.green {
   background-color: #27ae60;
 }
 
-#taskViewer #newTasks #taskList .taskListItem .taskTags .taskTag.orange {
+#taskViewer .taskCardsContainer #taskListNew .taskListItem .taskTags .taskTag.orange, #taskViewer .taskCardsContainer #taskListProgress .taskListItem .taskTags .taskTag.orange, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem .taskTags .taskTag.orange {
   background-color: #e67e22;
 }
 
-#taskViewer #newTasks #taskList .taskListItem .taskTags .taskTag.red {
+#taskViewer .taskCardsContainer #taskListNew .taskListItem .taskTags .taskTag.red, #taskViewer .taskCardsContainer #taskListProgress .taskListItem .taskTags .taskTag.red, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem .taskTags .taskTag.red {
   background-color: #c0392b;
 }
 
-#taskViewer #newTasks #taskList .taskListItem .taskDetails > ul > li {
+#taskViewer .taskCardsContainer #taskListNew .taskListItem .taskDetails > ul > li, #taskViewer .taskCardsContainer #taskListProgress .taskListItem .taskDetails > ul > li, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem .taskDetails > ul > li {
   align-items: center;
   margin-bottom: 0;
   line-height: .5;
   display: flex;
 }
 
-#taskViewer #newTasks #taskList .taskListItem .taskDetails > ul > li p {
+#taskViewer .taskCardsContainer #taskListNew .taskListItem .taskDetails > ul > li p, #taskViewer .taskCardsContainer #taskListProgress .taskListItem .taskDetails > ul > li p, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem .taskDetails > ul > li p {
   font-size: 14px;
 }
 
-#taskViewer #newTasks #taskList .taskListItem .taskDetails > ul > li .label {
+#taskViewer .taskCardsContainer #taskListNew .taskListItem .taskDetails > ul > li .label, #taskViewer .taskCardsContainer #taskListProgress .taskListItem .taskDetails > ul > li .label, #taskViewer .taskCardsContainer #taskListCompleted .taskListItem .taskDetails > ul > li .label {
   max-width: 160px;
   flex: 1 0 30px;
   font-weight: 600;

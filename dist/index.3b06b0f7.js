@@ -527,9 +527,9 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"2OD7o":[function(require,module,exports) {
 var _tasklistComponent = require("./components/tasklistComponent");
-var _addTaskModalComponent = require("./components/addTaskModalComponent");
 
-},{"./components/tasklistComponent":"ghcfo","./components/addTaskModalComponent":"1Xjui"}],"ghcfo":[function(require,module,exports) {
+},{"./components/tasklistComponent":"ghcfo"}],"ghcfo":[function(require,module,exports) {
+var _addTaskModalComponent = require("./addTaskModalComponent");
 // Creating a add task function
 // Initialise inputs from HTML (Add task list functionality)
 const addTaskForm = document.getElementById("taskForm");
@@ -543,7 +543,7 @@ const hoursInput = document.getElementById("hours");
 const minutesInput = document.getElementById("minutes");
 const taskDescriptionInput = document.getElementById("description");
 // Task list
-const taskListContainer = document.getElementById("taskList");
+const taskListContainer = document.getElementById("taskListNew");
 // Initialise task list array
 let taskListArray = [];
 // Event listener on the submit form button
@@ -558,7 +558,8 @@ addTaskForm.addEventListener("submit", (e)=>{
     let description = taskDescriptionInput.value;
     let task = createTaskObject(taskName, priority, difficulty, subject, hours, minutes, description);
     taskListArray.push(task);
-    renderTasks(task);
+    // Adds the task list array to the local storage object as a key and value pair
+    addToLocalStorage(taskListArray);
     addTaskForm.reset();
 });
 // Function that takes in parameters to create and return 1 task object
@@ -574,110 +575,144 @@ const createTaskObject = (taskName, priority, difficulty, subject, hours, minute
         priority,
         difficulty,
         subject,
-        estimatedDuration: hours + " hrs / " + minutes + " minutes",
-        description
+        estimatedDuration: hours + " hrs  " + minutes + " minutes",
+        description,
+        taskStatus: "new"
     };
 };
 // Renders the current new task to the DOM
-const renderTasks = (task)=>{
+const renderTasks = (allTasks)=>{
     updateEmpty();
-    let item = document.createElement("li");
-    item.setAttribute("data-id", task.id);
-    // Add the css class to the item container
-    item.classList.add("taskListItem");
-    // item.innerHTML = "<p>" + task.taskName + "</p>";
-    // Create task tags div
-    let taskTagsDiv = document.createElement("div");
-    taskTagsDiv.className += "taskTags";
-    // Create task details container
-    let taskDetailsContainer = document.createElement("div");
-    taskDetailsContainer.classList.add("taskDetails");
-    // Manipulate the HTML structure of task deatils container to suit the needs of this list
-    taskDetailsContainer.innerHTML = `
-		<ul>
-			<li>
-				<p class="label">Task Name:</p>
-				<p>${task.taskName}</p>
-			</li>
-			<li>
-				<p class="label">Subject:</p>
-				<p>${task.subject}</p>
-			</li>
-			<li>
-				<p class="label">Date Created:</p>
-				<p>${task.createdDate}</p>
-			</li>
-			<li>
-				<p class="label">Estimated Duration:</p>
-				<p>${task.estimatedDuration}</p>
-			</li>
-		</ul>
-	`;
-    // Creating the functionality for displaying the tags of priority and difficulty
-    // Create 2 spans to and check the value of each. add class name green, orange or red to change tag color
-    let difficultyTag = document.createElement("span");
-    let priorityTag = document.createElement("span");
-    // Create the text node for the span
-    let difficultyTagText = document.createTextNode(task.difficulty);
-    let priorityTagText = document.createTextNode(task.priority);
-    // Add initial class to spans
-    difficultyTag.classList.add("taskTag");
-    priorityTag.classList.add("taskTag");
-    // Append text nodes to span
-    difficultyTag.appendChild(difficultyTagText);
-    priorityTag.appendChild(priorityTagText);
-    // Depending on the colour add classname to spans
-    // Difficulty
-    if (task.difficulty === "Easy") difficultyTag.classList.add("green");
-    else if (task.difficulty === "Medium") difficultyTag.classList.add("orange");
-    else difficultyTag.classList.add("red");
-    // Priority
-    if (task.priority === "Low Priority") priorityTag.classList.add("green");
-    else if (task.priority === "Medium Priority") priorityTag.classList.add("orange");
-    else priorityTag.classList.add("red");
-    taskTagsDiv.appendChild(difficultyTag);
-    taskTagsDiv.appendChild(priorityTag);
-    // Append the tags into the tasktags div
-    item.appendChild(taskTagsDiv);
-    item.appendChild(taskDetailsContainer);
-    taskListContainer.appendChild(item);
-    // Creating a delete button associated with specific task
-    // let delButton = document.createElement("button");
-    // let delButtonText = document.createTextNode("Delete Task");
-    // delButton.appendChild(delButtonText);
-    // item.append(delButton);
-    // // Event listener for additional dom elements
-    // delButton.addEventListener("click", (e) => {
-    // 	e.preventDefault();
-    // 	let id = e.target.parentElement.getAttribute("data-id");
-    // 	let index = taskListArray.findIndex((task) => task.id === Number(id));
-    // 	removeItemFromArray(taskListArray, index);
-    // 	item.remove();
-    // 	console.log(taskListArray);
-    // 	updateEmpty();
-    // });
+    // Everytime the render tasks function is called we would want to loop over the array and display all values in our local storage
+    allTasks.forEach((task1)=>{
+        // console.log(task);
+        const item = document.createElement("li");
+        item.setAttribute("data-id", task1.id);
+        // Add the css class to the item container
+        item.classList.add("taskListItem");
+        // item.innerHTML = "<p>" + task.taskName + "</p>";
+        // Create task tags div
+        const taskTagsDiv = document.createElement("div");
+        taskTagsDiv.className += "taskTags";
+        // Create task details container
+        const taskDetailsContainer = document.createElement("div");
+        taskDetailsContainer.classList.add("taskDetails");
+        // Manipulate the HTML structure of task deatils container to suit the needs of this list
+        taskDetailsContainer.innerHTML = `
+			<ul>
+				<li>
+					<p class="label">Task Name:</p>
+					<p>${task1.taskName}</p>
+				</li>
+				<li>
+					<p class="label">Subject:</p>
+					<p>${task1.subject}</p>
+				</li>
+				<li>
+					<p class="label">Date Created:</p>
+					<p>${task1.createdDate}</p>
+				</li>
+				<li>
+					<p class="label">Estimated Duration:</p>
+					<p>${task1.estimatedDuration}</p>
+				</li>
+			</ul>
+		`;
+        // Creating the functionality for displaying the tags of priority and difficulty
+        // Create 2 spans to and check the value of each. add class name green, orange or red to change tag color
+        const difficultyTag = document.createElement("span");
+        const priorityTag = document.createElement("span");
+        // Create the text node for the span
+        const difficultyTagText = document.createTextNode(task1.difficulty);
+        const priorityTagText = document.createTextNode(task1.priority);
+        // Add initial class to spans
+        difficultyTag.classList.add("taskTag");
+        priorityTag.classList.add("taskTag");
+        // Append text nodes to span
+        difficultyTag.appendChild(difficultyTagText);
+        priorityTag.appendChild(priorityTagText);
+        // Depending on the colour add classname to spans
+        // Difficulty
+        if (task1.difficulty === "Easy") difficultyTag.classList.add("green");
+        else if (task1.difficulty === "Medium") difficultyTag.classList.add("orange");
+        else difficultyTag.classList.add("red");
+        // Priority
+        if (task1.priority === "Low Priority") priorityTag.classList.add("green");
+        else if (task1.priority === "Medium Priority") priorityTag.classList.add("orange");
+        else priorityTag.classList.add("red");
+        taskTagsDiv.appendChild(difficultyTag);
+        taskTagsDiv.appendChild(priorityTag);
+        // Append the tags into the tasktags div
+        item.appendChild(taskTagsDiv);
+        item.appendChild(taskDetailsContainer);
+        // Creating a delete button associated with specific task
+        let delButton = document.createElement("button");
+        let delButtonText = document.createTextNode("Delete Task");
+        delButton.className += "delButton";
+        delButton.appendChild(delButtonText);
+        item.append(delButton);
+        // // Event listener for additional dom elements
+        delButton.addEventListener("click", (e)=>{
+            e.preventDefault();
+            let id = e.target.parentElement.getAttribute("data-id");
+            let index = taskListArray.findIndex((task)=>task.id === Number(id)
+            );
+            removeItemFromArray(taskListArray, index);
+            item.remove();
+            addToLocalStorage(taskListArray);
+            console.log(taskListArray);
+            updateEmpty();
+        });
+        taskListContainer.appendChild(item);
+    });
     addTaskForm.reset();
 };
+// deletes a todo from todos array, then updates localstorage and renders updated list to screen
+// function deleteTodo(id) {
+// 	// filters out the <li> with the id and updates the todos array
+// 	todos = todos.filter(function (item) {
+// 		// use != not !==, because here types are different. One is number and other is string
+// 		return item.id != id;
+// 	});
+// 	// update the localStorage
+// 	addToLocalStorage(todos);
+// }
 const removeItemFromArray = (arr, index)=>{
     if (index > -1) arr.splice(index, 1);
     return arr;
 };
 const updateEmpty = ()=>{
-    if (taskListArray.length > 0) document.getElementById("emptyListText").style.display = "none";
-    else document.getElementById("emptyListText").style.display = "block";
+    const reference = localStorage.getItem("allTasks");
+    if (reference) {
+        if (reference.length > 0) document.getElementById("emptyListText").style.display = "none";
+        else document.getElementById("emptyListText").style.display = "block";
+    }
 };
 const capitaliseFirstLetter = (inputString)=>{
     return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 };
+// Add to local storage capability
+const addToLocalStorage = (allTasks)=>{
+    localStorage.setItem("allTasks", JSON.stringify(allTasks));
+    console.log("Task added");
+    renderTasks(allTasks);
+};
+const getFromLocalStorage = ()=>{
+    const reference = localStorage.getItem("allTasks");
+    // Checking if the reference exists
+    if (reference) {
+        allTasks = JSON.parse(reference);
+        renderTasks(allTasks);
+    } else console.log("Key reference not found in local storage");
+};
+getFromLocalStorage();
 
-},{}],"1Xjui":[function(require,module,exports) {
+},{"./addTaskModalComponent":"1Xjui"}],"1Xjui":[function(require,module,exports) {
 // Modal components for add Task
 let addTaskModal = document.getElementById("addTaskForm");
 let addTaskModalOpen = document.getElementById("openNewTaskButton");
 let closeBtn = document.getElementsByClassName("close")[0];
 addTaskModalOpen.onclick = ()=>{
-    console.log("Button clicked");
-    console.log(addTaskModal);
     addTaskModal.style.display = "block";
 };
 closeBtn.onclick = ()=>{
@@ -686,7 +721,6 @@ closeBtn.onclick = ()=>{
 window.onclick = (e)=>{
     if (e.target === addTaskModal) addTaskModal.style.display = "none";
 };
-console.log("Page loaded");
 
 },{}]},["2xDT7","2OD7o"], "2OD7o", "parcelRequire5724")
 
