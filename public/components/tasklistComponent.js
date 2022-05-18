@@ -217,7 +217,8 @@ const refreshRenders = () => {
 	if (localStorage.length > 0) {
 		for (let i = 0; i < localStorage.length; i++) {
 			let currentKey = localStorage.key(i);
-			renderTask(JSON.parse(localStorage.getItem(currentKey)));
+			if (currentKey.slice(0, 5) === "Task:")
+				renderTask(JSON.parse(localStorage.getItem(currentKey)));
 		}
 	} else {
 		updateEmpty();
