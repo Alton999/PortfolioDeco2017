@@ -182,16 +182,6 @@ const renderTasks = (allTasks) => {
 
 	addTaskForm.reset();
 };
-// deletes a todo from todos array, then updates localstorage and renders updated list to screen
-// function deleteTodo(id) {
-// 	// filters out the <li> with the id and updates the todos array
-// 	todos = todos.filter(function (item) {
-// 		// use != not !==, because here types are different. One is number and other is string
-// 		return item.id != id;
-// 	});
-// 	// update the localStorage
-// 	addToLocalStorage(todos);
-// }
 
 const removeItemFromArray = (arr, index) => {
 	if (index > -1) {

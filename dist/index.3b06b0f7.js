@@ -527,8 +527,9 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"2OD7o":[function(require,module,exports) {
 var _tasklistComponent = require("./components/tasklistComponent");
+var _navigation = require("./components/navigation");
 
-},{"./components/tasklistComponent":"ghcfo"}],"ghcfo":[function(require,module,exports) {
+},{"./components/tasklistComponent":"ghcfo","./components/navigation":"jFVbj"}],"ghcfo":[function(require,module,exports) {
 var _addTaskModalComponent = require("./addTaskModalComponent");
 // Creating a add task function
 // Initialise inputs from HTML (Add task list functionality)
@@ -667,16 +668,6 @@ const renderTasks = (allTasks)=>{
     });
     addTaskForm.reset();
 };
-// deletes a todo from todos array, then updates localstorage and renders updated list to screen
-// function deleteTodo(id) {
-// 	// filters out the <li> with the id and updates the todos array
-// 	todos = todos.filter(function (item) {
-// 		// use != not !==, because here types are different. One is number and other is string
-// 		return item.id != id;
-// 	});
-// 	// update the localStorage
-// 	addToLocalStorage(todos);
-// }
 const removeItemFromArray = (arr, index)=>{
     if (index > -1) arr.splice(index, 1);
     return arr;
@@ -721,6 +712,26 @@ closeBtn.onclick = ()=>{
 window.onclick = (e)=>{
     if (e.target === addTaskModal) addTaskModal.style.display = "none";
 };
+
+},{}],"jFVbj":[function(require,module,exports) {
+// Navigation buttons
+const studyModeToggle = document.getElementById("studyModeToggle");
+const taskViewerToggle = document.getElementById("taskViewerToggle");
+// Task study mode
+const studyModeContainer = document.getElementById("studyMode");
+const taskViewer = document.getElementById("taskViewer");
+// Initialise to show kanban board first
+studyModeContainer.style.display = "none";
+studyModeToggle.addEventListener("click", (e)=>{
+    e.preventDefault();
+    taskViewer.style.display = "none";
+    studyModeContainer.style.display = "block";
+});
+taskViewerToggle.addEventListener("click", (e)=>{
+    e.preventDefault();
+    taskViewer.style.display = "block";
+    studyModeContainer.style.display = "none";
+});
 
 },{}]},["2xDT7","2OD7o"], "2OD7o", "parcelRequire5724")
 
