@@ -1,11 +1,10 @@
 import "./addTaskModalComponent";
-
-// import { openStudyMode } from "./studyModeComponent";
+import "./navigation";
 
 // Creating a add task function
 // Initialise inputs from HTML (Add task list functionality)
 const addTaskForm = document.getElementById("taskForm");
-// const addTaskButton = document.querySelector("#taskForm > button");
+const addTaskButton = document.querySelector("#taskForm > button");
 
 // Add task input fields
 const taskNameInput = document.getElementById("taskName");
@@ -18,9 +17,6 @@ const taskDescriptionInput = document.getElementById("description");
 
 // Task list
 const taskListContainer = document.getElementById("taskListNew");
-
-// Initialise task list array
-let taskListArray = [];
 
 // Event listener on the submit form button
 addTaskForm.addEventListener("submit", (e) => {
@@ -42,10 +38,11 @@ addTaskForm.addEventListener("submit", (e) => {
 		minutes,
 		description
 	);
-	taskListArray.push(task);
 
 	// Adds the task list array to the local storage object as a key and value pair
-	addToLocalStorage(taskListArray);
+	addToLocalStorage(task);
+	getFromLocalStorage(task.id);
+	// renderTasks(getFromLocalStorage());
 	addTaskForm.reset();
 });
 
@@ -78,27 +75,26 @@ const createTaskObject = (
 };
 
 // Renders the current new task to the DOM
-const renderTasks = (allTasks) => {
+const renderTask = (task) => {
 	updateEmpty();
-
+	// console.log("From render", allTasks);
 	// Everytime the render tasks function is called we would want to loop over the array and display all values in our local storage
-	allTasks.forEach((task) => {
-		// console.log(task);
-		const item = document.createElement("li");
-		item.setAttribute("data-id", task.id);
-		// Add the css class to the item container
-		item.classList.add("taskListItem");
+	console.log(task);
+	const item = document.createElement("li");
+	item.setAttribute("data-id", task.id);
+	// Add the css class to the item container
+	item.classList.add("taskListItem");
+	// item.innerHTML = "<p>" + task.taskName + "</p>";
 
-		// Create task tags div
-		const taskTagsDiv = document.createElement("div");
-		taskTagsDiv.className += "taskTags";
-		// Create task details container
-		const taskDetailsContainer = document.createElement("div");
-		taskDetailsContainer.classList.add("taskDetails");
+	// Create task tags div
+	const taskTagsDiv = document.createElement("div");
+	taskTagsDiv.className += "taskTags";
+	// Create task details container
+	const taskDetailsContainer = document.createElement("div");
+	taskDetailsContainer.classList.add("taskDetails");
 
-		// Manipulate the HTML structure of task details container to suit the needs of this list
-
-		taskDetailsContainer.innerHTML = `
+	// Manipulate the HTML structure of task deatils container to suit the needs of this list
+	taskDetailsContainer.innerHTML = `
 			<ul>
 				<li>
 					<p class="label">Task Name:</p>
@@ -119,131 +115,134 @@ const renderTasks = (allTasks) => {
 			</ul>
 		`;
 
-		// Creating the functionality for displaying the tags of priority and difficulty
-		// Create 2 spans to and check the value of each. add class name green, orange or red to change tag color
-		const difficultyTag = document.createElement("span");
-		const priorityTag = document.createElement("span");
+	// Creating the functionality for displaying the tags of priority and difficulty
+	// Create 2 spans to and check the value of each. add class name green, orange or red to change tag color
+	const difficultyTag = document.createElement("span");
+	const priorityTag = document.createElement("span");
 
-		// Create the text node for the span
-		const difficultyTagText = document.createTextNode(task.difficulty);
-		const priorityTagText = document.createTextNode(task.priority);
+	// Create the text node for the span
+	const difficultyTagText = document.createTextNode(task.difficulty);
+	const priorityTagText = document.createTextNode(task.priority);
 
-		// Add initial class to spans
-		difficultyTag.classList.add("taskTag");
-		priorityTag.classList.add("taskTag");
+	// Add initial class to spans
+	difficultyTag.classList.add("taskTag");
+	priorityTag.classList.add("taskTag");
 
-		// Append text nodes to span
-		difficultyTag.appendChild(difficultyTagText);
-		priorityTag.appendChild(priorityTagText);
+	// Append text nodes to span
+	difficultyTag.appendChild(difficultyTagText);
+	priorityTag.appendChild(priorityTagText);
 
-		// Depending on the colour add classname to spans
-		// Difficulty
-		if (task.difficulty === "Easy") {
-			difficultyTag.classList.add("green");
-		} else if (task.difficulty === "Medium") {
-			difficultyTag.classList.add("orange");
-		} else {
-			difficultyTag.classList.add("red");
-		}
+	// Depending on the colour add classname to spans
+	// Difficulty
+	if (task.difficulty === "Easy") {
+		difficultyTag.classList.add("green");
+	} else if (task.difficulty === "Medium") {
+		difficultyTag.classList.add("orange");
+	} else {
+		difficultyTag.classList.add("red");
+	}
 
-		// Priority
-		if (task.priority === "Low Priority") {
-			priorityTag.classList.add("green");
-		} else if (task.priority === "Medium Priority") {
-			priorityTag.classList.add("orange");
-		} else {
-			priorityTag.classList.add("red");
-		}
+	// Priority
+	if (task.priority === "Low Priority") {
+		priorityTag.classList.add("green");
+	} else if (task.priority === "Medium Priority") {
+		priorityTag.classList.add("orange");
+	} else {
+		priorityTag.classList.add("red");
+	}
 
-		taskTagsDiv.appendChild(difficultyTag);
-		taskTagsDiv.appendChild(priorityTag);
-		// Append the tags into the tasktags div
-		item.appendChild(taskTagsDiv);
-		item.appendChild(taskDetailsContainer);
+	taskTagsDiv.appendChild(difficultyTag);
+	taskTagsDiv.appendChild(priorityTag);
+	// Append the ctags into the tasktags div
+	item.appendChild(taskTagsDiv);
+	item.appendChild(taskDetailsContainer);
 
-		let buttonsContainer = document.createElement("div");
-		buttonsContainer.className += "actionButtonContainer";
+	// Creating buttons container
+	// let buttonsContainer = document.createElement("div");
+	// buttonsContainer.className += "actionButtonContainer";
 
-		// Creating a delete button associated with specific task
-		let delButton = document.createElement("button");
-		let delButtonText = document.createTextNode("Delete Task");
-		delButton.className += "delButton";
-		delButton.appendChild(delButtonText);
-		buttonsContainer.append(delButton);
+	let studyButton = document.createElement("button");
+	let studyButtonText = document.createTextNode("Study Now");
+	studyButton.className += "studyButton";
+	studyButton.appendChild(studyButtonText);
+	item.append(studyButton);
+	// buttonsContainer.appendChild(studyButton);
 
-		let openStudyButton = document.createElement("button");
-		let studyButtonText = document.createTextNode("Study");
-		openStudyButton.className += "studyButton";
-		openStudyButton.appendChild(studyButtonText);
-		buttonsContainer.append(openStudyButton);
-		item.appendChild(buttonsContainer);
+	// Creating a delete button associated with specific task
+	let delButton = document.createElement("button");
+	let delButtonText = document.createTextNode("Delete Task");
+	delButton.className += "delButton";
 
-		// // Event listener for additional dom elements
-		delButton.addEventListener("click", (e) => {
-			e.preventDefault();
-			let id = e.target.parentElement.getAttribute("data-id");
-			let index = taskListArray.findIndex((task) => task.id === Number(id));
-			removeItemFromArray(taskListArray, index);
-			item.remove();
-			addToLocalStorage(taskListArray);
-			console.log(taskListArray);
-			updateEmpty();
-		});
+	delButton.appendChild(delButtonText);
+	// buttonsContainer.appendChild(delButton);
+	item.append(delButton);
 
-		// openStudyButton.addEventListener("click", (e) => {
-		// 	e.preventDefault();
-		// 	let id = e.target.parentElement.getAttribute("data-id");
-		// 	let index = taskListArray.findIndex((task) => task.id === Number(id));
-		// 	console.log(index);
-		// 	// console.log(Number(id));
-		// 	console.log(taskListArray);
-		// });
-
-		taskListContainer.appendChild(item);
+	// // Event listener for additional dom elements
+	delButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		let id = e.target.parentElement.getAttribute("data-id");
+		console.log(id);
+		localStorage.removeItem("Task: " + id.toString());
+		// let index = taskListArray.findIndex((task) => task.id === Number(id));
+		// removeItemFromArray(taskListArray, index);
+		item.remove();
+		// addToLocalStorage(taskListArray);
+		// console.log(taskListArray);
+		// refreshRenders();
+		updateEmpty();
+		// getFromLocalStorage(id);
+		console.log("Button clicked");
 	});
+
+	studyButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		let id = e.target.parentElement.getAttribute("data-id");
+		taskViewer.style.display = "block";
+		studyModeContainer.style.display = "none";
+		console.log(id);
+	});
+
+	taskListContainer.appendChild(item);
 
 	addTaskForm.reset();
 };
 
-const removeItemFromArray = (arr, index) => {
-	if (index > -1) {
-		arr.splice(index, 1);
-	}
-	return arr;
-};
-
 const updateEmpty = () => {
-	const reference = localStorage.getItem("allTasks");
-	if (reference) {
-		if (reference.length > 0) {
-			document.getElementById("emptyListText").style.display = "none";
-		} else {
-			document.getElementById("emptyListText").style.display = "block";
+	counter = 0;
+	for (let i = 0; i < localStorage.length; i++) {
+		const currentKey = localStorage.key("i");
+		if (currentKey.slice(0, 5) === "Task:") {
+			counter += 1;
 		}
 	}
-};
-
-const capitaliseFirstLetter = (inputString) => {
-	return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+	if (counter > 0) {
+		document.getElementById("emptyListText").style.display = "none";
+	} else {
+		document.getElementById("emptyListText").style.display = "block";
+	}
 };
 
 // Add to local storage capability
-const addToLocalStorage = (allTasks) => {
-	localStorage.setItem("allTasks", JSON.stringify(allTasks));
-	console.log("Task added");
-	renderTasks(allTasks);
+const addToLocalStorage = (task) => {
+	localStorage.setItem("Task: " + task.id.toString(), JSON.stringify(task));
+
+	console.log("Task: " + task.id.toString());
 };
 
-const getFromLocalStorage = () => {
-	const reference = localStorage.getItem("allTasks");
+const getFromLocalStorage = (taskId) => {
+	const key = "Task: " + taskId.toString();
+	renderTask(JSON.parse(localStorage.getItem(key)));
+};
 
-	// Checking if the reference exists
-	if (reference) {
-		allTasks = JSON.parse(reference);
-		renderTasks(allTasks);
-	} else {
-		console.log("Key reference not found in local storage");
+// renders all elements after refresh
+
+window.onload = (e) => {
+	e.preventDefault();
+	for (const key in localStorage) {
+		// console.log(key, key.slice(0))
+		if (key.slice(0, 5) === "Task:") {
+			console.log("This was reached");
+			renderTask(JSON.parse(localStorage.getItem(key)));
+		}
 	}
 };
-
-getFromLocalStorage();
