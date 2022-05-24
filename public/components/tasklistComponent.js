@@ -1,9 +1,11 @@
 import "./addTaskModalComponent";
 
+// import { openStudyMode } from "./studyModeComponent";
+
 // Creating a add task function
 // Initialise inputs from HTML (Add task list functionality)
 const addTaskForm = document.getElementById("taskForm");
-const addTaskButton = document.querySelector("#taskForm > button");
+// const addTaskButton = document.querySelector("#taskForm > button");
 
 // Add task input fields
 const taskNameInput = document.getElementById("taskName");
@@ -86,7 +88,6 @@ const renderTasks = (allTasks) => {
 		item.setAttribute("data-id", task.id);
 		// Add the css class to the item container
 		item.classList.add("taskListItem");
-		// item.innerHTML = "<p>" + task.taskName + "</p>";
 
 		// Create task tags div
 		const taskTagsDiv = document.createElement("div");
@@ -95,7 +96,8 @@ const renderTasks = (allTasks) => {
 		const taskDetailsContainer = document.createElement("div");
 		taskDetailsContainer.classList.add("taskDetails");
 
-		// Manipulate the HTML structure of task deatils container to suit the needs of this list
+		// Manipulate the HTML structure of task details container to suit the needs of this list
+
 		taskDetailsContainer.innerHTML = `
 			<ul>
 				<li>
@@ -159,12 +161,22 @@ const renderTasks = (allTasks) => {
 		item.appendChild(taskTagsDiv);
 		item.appendChild(taskDetailsContainer);
 
+		let buttonsContainer = document.createElement("div");
+		buttonsContainer.className += "actionButtonContainer";
+
 		// Creating a delete button associated with specific task
 		let delButton = document.createElement("button");
 		let delButtonText = document.createTextNode("Delete Task");
 		delButton.className += "delButton";
 		delButton.appendChild(delButtonText);
-		item.append(delButton);
+		buttonsContainer.append(delButton);
+
+		let openStudyButton = document.createElement("button");
+		let studyButtonText = document.createTextNode("Study");
+		openStudyButton.className += "studyButton";
+		openStudyButton.appendChild(studyButtonText);
+		buttonsContainer.append(openStudyButton);
+		item.appendChild(buttonsContainer);
 
 		// // Event listener for additional dom elements
 		delButton.addEventListener("click", (e) => {
@@ -177,21 +189,21 @@ const renderTasks = (allTasks) => {
 			console.log(taskListArray);
 			updateEmpty();
 		});
+
+		// openStudyButton.addEventListener("click", (e) => {
+		// 	e.preventDefault();
+		// 	let id = e.target.parentElement.getAttribute("data-id");
+		// 	let index = taskListArray.findIndex((task) => task.id === Number(id));
+		// 	console.log(index);
+		// 	// console.log(Number(id));
+		// 	console.log(taskListArray);
+		// });
+
 		taskListContainer.appendChild(item);
 	});
 
 	addTaskForm.reset();
 };
-// deletes a todo from todos array, then updates localstorage and renders updated list to screen
-// function deleteTodo(id) {
-// 	// filters out the <li> with the id and updates the todos array
-// 	todos = todos.filter(function (item) {
-// 		// use != not !==, because here types are different. One is number and other is string
-// 		return item.id != id;
-// 	});
-// 	// update the localStorage
-// 	addToLocalStorage(todos);
-// }
 
 const removeItemFromArray = (arr, index) => {
 	if (index > -1) {

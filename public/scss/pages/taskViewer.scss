@@ -63,6 +63,7 @@
 			padding: 15px 30px;
 			font-size: 16px;
 			font-weight: 600;
+			cursor: pointer;
 		}
 
 		width: 33%;
@@ -107,17 +108,30 @@
 		#taskListProgress,
 		#taskListCompleted {
 			list-style-type: none;
-			.delButton {
+			.actionButtonContainer {
+				display: flex;
+				flex-direction: row;
+				margin-top: 20px;
+			}
+			button {
 				background: none;
 				cursor: pointer;
-				color: #c0392b;
 				border: none;
 				border-radius: 5px;
-				width: 100%;
+				width: 50%;
 				transition: 0.5s;
-				margin-top: 10px;
+			}
+			.delButton {
+				color: #c0392b;
 				&:hover {
 					background-color: #c0392b;
+					color: white;
+				}
+			}
+			.studyButton {
+				color: #27ae60;
+				&:hover {
+					background-color: #27ae60;
 					color: white;
 				}
 			}
