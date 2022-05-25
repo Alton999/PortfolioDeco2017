@@ -1,53 +1,56 @@
 import "./addTaskModalComponent";
-import "./navigation";
+// import "./navigation";
 
 // Creating a add task function
 // Initialise inputs from HTML (Add task list functionality)
-const addTaskForm = document.getElementById("taskForm");
-const addTaskButton = document.querySelector("#taskForm > button");
+// const addTaskForm = document.getElementById("taskForm");
+// // const addTaskButton = document.querySelector("#taskForm > button");
 
-// Add task input fields
-const taskNameInput = document.getElementById("taskName");
-const priorityInput = document.getElementById("priority");
-const difficultyInput = document.getElementById("difficulty");
-const subjectInput = document.getElementById("subject");
-const hoursInput = document.getElementById("hours");
-const minutesInput = document.getElementById("minutes");
-const taskDescriptionInput = document.getElementById("description");
+// // Add task input fields
+// const taskNameInput = document.getElementById("taskName");
+// const priorityInput = document.getElementById("priority");
+// const difficultyInput = document.getElementById("difficulty");
+// const subjectInput = document.getElementById("subject");
+// const hoursInput = document.getElementById("hours");
+// const minutesInput = document.getElementById("minutes");
+// const taskDescriptionInput = document.getElementById("description");
 
-// Task list
+// // Task list
 const taskListContainer = document.getElementById("taskListNew");
 
+// Navigation
+// Initialise to show kanban board first
+
 // Event listener on the submit form button
-addTaskForm.addEventListener("submit", (e) => {
-	e.preventDefault();
-	let taskName = taskNameInput.value;
-	let priority = priorityInput.value;
-	let difficulty = difficultyInput.value;
-	let subject = subjectInput.value;
-	let hours = hoursInput.value;
-	let minutes = minutesInput.value;
-	let description = taskDescriptionInput.value;
+// addTaskForm.addEventListener("submit", (e) => {
+// 	e.preventDefault();
+// 	let taskName = taskNameInput.value;
+// 	let priority = priorityInput.value;
+// 	let difficulty = difficultyInput.value;
+// 	let subject = subjectInput.value;
+// 	let hours = hoursInput.value;
+// 	let minutes = minutesInput.value;
+// 	let description = taskDescriptionInput.value;
 
-	let task = createTaskObject(
-		taskName,
-		priority,
-		difficulty,
-		subject,
-		hours,
-		minutes,
-		description
-	);
+// 	let task = createTaskObject(
+// 		taskName,
+// 		priority,
+// 		difficulty,
+// 		subject,
+// 		hours,
+// 		minutes,
+// 		description
+// 	);
 
-	// Adds the task list array to the local storage object as a key and value pair
-	addToLocalStorage(task);
-	getFromLocalStorage(task.id);
-	// renderTasks(getFromLocalStorage());
-	addTaskForm.reset();
-});
+// 	// Adds the task list array to the local storage object as a key and value pair
+// 	addToLocalStorage(task);
+// 	getFromLocalStorage(task.id);
+// 	// renderTasks(getFromLocalStorage());
+// 	addTaskForm.reset();
+// });
 
 // Function that takes in parameters to create and return 1 task object
-const createTaskObject = (
+export const createTaskObject = (
 	taskName,
 	priority,
 	difficulty,
@@ -197,39 +200,43 @@ const renderTask = (task) => {
 	studyButton.addEventListener("click", (e) => {
 		e.preventDefault();
 		let id = e.target.parentElement.getAttribute("data-id");
-		taskViewer.style.display = "block";
-		studyModeContainer.style.display = "none";
+		// studyModeContainer.style.display = "block";
+		// taskViewer.style.display = "none";
 		console.log(id);
 	});
 
 	taskListContainer.appendChild(item);
 
-	addTaskForm.reset();
+	// addTaskForm.reset();
 };
 
 const updateEmpty = () => {
 	counter = 0;
 	for (let i = 0; i < localStorage.length; i++) {
 		const currentKey = localStorage.key("i");
+		console.log(currentKey);
 		if (currentKey.slice(0, 5) === "Task:") {
 			counter += 1;
 		}
 	}
+	// console.log(counter);
 	if (counter > 0) {
 		document.getElementById("emptyListText").style.display = "none";
+		// console.log("more than 0 elements ");
 	} else {
 		document.getElementById("emptyListText").style.display = "block";
+		// console.log("0elements ");
 	}
 };
 
 // Add to local storage capability
-const addToLocalStorage = (task) => {
+export const addToLocalStorage = (task) => {
 	localStorage.setItem("Task: " + task.id.toString(), JSON.stringify(task));
 
 	console.log("Task: " + task.id.toString());
 };
 
-const getFromLocalStorage = (taskId) => {
+export const getFromLocalStorage = (taskId) => {
 	const key = "Task: " + taskId.toString();
 	renderTask(JSON.parse(localStorage.getItem(key)));
 };
@@ -238,10 +245,10 @@ const getFromLocalStorage = (taskId) => {
 
 window.onload = (e) => {
 	e.preventDefault();
+	updateEmpty();
 	for (const key in localStorage) {
 		// console.log(key, key.slice(0))
 		if (key.slice(0, 5) === "Task:") {
-			console.log("This was reached");
 			renderTask(JSON.parse(localStorage.getItem(key)));
 		}
 	}
