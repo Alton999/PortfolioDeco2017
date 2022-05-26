@@ -13,6 +13,50 @@
 			<button id="taskViewerToggle">Task Viewer Mode</button>
 			<section id="studyMode">
 				<h1>Study Mode</h1>
+
+				<!-- Bar containing details of task selected -->
+				<section class="container">
+					
+					<section class="headerContainer">
+						<p class="taskLabel">Task: </p>
+						<p id="taskNameDOM"></p>
+					</section>
+					<section class="headerContainer">
+						<p class="taskLabel">Subject: </p>
+						<p id="subjectE"></p>
+					</section>
+					<!-- Header of each item -->
+					<section id="barHeader">
+						<div>
+							<h3>Difficulty</h3>
+						</div>
+						<div>
+							<h3>Elapsed Duration</h3>
+						</div>
+						<div>
+							<h3>Estimated Duration</h3>
+						</div>
+						<div>
+							<h3>Interruptions</h3>
+						</div>
+					</section>
+					
+					<!-- Value of each item -->
+					<section id="barContents">
+						<div >
+							<p id="difficultyStudy"></p>
+						</div>
+						<div>
+							<p id="elapsedDuration"></p>
+						</div>
+						<div>
+							<p id="estimatedDuration"></p>
+						</div>
+						<div>
+							<p id="interruptionsCounter"></p>
+						</div>
+					</section>
+				</section>
 			</section>
 			<!-- Section that shows the different tasks that you have created -->
 			<section id="taskViewer">
@@ -41,7 +85,7 @@
 
 						<ul id="taskListProgress">
 							<p id="emptyListText">You have not added any tasks yet.</p>
-							<!-- Indivial task card -->
+							<!-- Individual task card -->
 						
 						</ul>
 					</div>
@@ -53,7 +97,7 @@
 
 						<ul id="taskListCompleted">
 							<p id="emptyListText">You have not added any tasks yet.</p>
-							<!-- Indivial task card -->
+							<!-- Individual task card -->
 						
 						</ul>
 					</div>

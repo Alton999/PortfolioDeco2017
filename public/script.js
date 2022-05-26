@@ -39,7 +39,6 @@ addTaskForm.addEventListener("submit", (e) => {
 	let hours = hoursInput.value;
 	let minutes = minutesInput.value;
 	let description = taskDescriptionInput.value;
-
 	let task = TaskList.createTaskObject(
 		taskName,
 		priority,

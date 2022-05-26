@@ -1,53 +1,9 @@
 import "./addTaskModalComponent";
-// import "./navigation";
 
-// Creating a add task function
-// Initialise inputs from HTML (Add task list functionality)
-// const addTaskForm = document.getElementById("taskForm");
-// // const addTaskButton = document.querySelector("#taskForm > button");
-
-// // Add task input fields
-// const taskNameInput = document.getElementById("taskName");
-// const priorityInput = document.getElementById("priority");
-// const difficultyInput = document.getElementById("difficulty");
-// const subjectInput = document.getElementById("subject");
-// const hoursInput = document.getElementById("hours");
-// const minutesInput = document.getElementById("minutes");
-// const taskDescriptionInput = document.getElementById("description");
+import * as StudyMode from "./studyMode";
 
 // // Task list
 const taskListContainer = document.getElementById("taskListNew");
-
-// Navigation
-// Initialise to show kanban board first
-
-// Event listener on the submit form button
-// addTaskForm.addEventListener("submit", (e) => {
-// 	e.preventDefault();
-// 	let taskName = taskNameInput.value;
-// 	let priority = priorityInput.value;
-// 	let difficulty = difficultyInput.value;
-// 	let subject = subjectInput.value;
-// 	let hours = hoursInput.value;
-// 	let minutes = minutesInput.value;
-// 	let description = taskDescriptionInput.value;
-
-// 	let task = createTaskObject(
-// 		taskName,
-// 		priority,
-// 		difficulty,
-// 		subject,
-// 		hours,
-// 		minutes,
-// 		description
-// 	);
-
-// 	// Adds the task list array to the local storage object as a key and value pair
-// 	addToLocalStorage(task);
-// 	getFromLocalStorage(task.id);
-// 	// renderTasks(getFromLocalStorage());
-// 	addTaskForm.reset();
-// });
 
 // Function that takes in parameters to create and return 1 task object
 export const createTaskObject = (
@@ -80,9 +36,10 @@ export const createTaskObject = (
 // Renders the current new task to the DOM
 const renderTask = (task) => {
 	updateEmpty();
+
 	// console.log("From render", allTasks);
 	// Everytime the render tasks function is called we would want to loop over the array and display all values in our local storage
-	console.log(task);
+	console.log(task.difficulty);
 	const item = document.createElement("li");
 	item.setAttribute("data-id", task.id);
 	// Add the css class to the item container
@@ -100,7 +57,7 @@ const renderTask = (task) => {
 	taskDetailsContainer.innerHTML = `
 			<ul>
 				<li>
-					<p class="label">Task Name:</p>
+					<p class="label">Task:</p>
 					<p>${task.taskName}</p>
 				</li>
 				<li>
@@ -184,7 +141,7 @@ const renderTask = (task) => {
 	delButton.addEventListener("click", (e) => {
 		e.preventDefault();
 		let id = e.target.parentElement.getAttribute("data-id");
-		console.log(id);
+		// console.log(id);
 		localStorage.removeItem("Task: " + id.toString());
 		// let index = taskListArray.findIndex((task) => task.id === Number(id));
 		// removeItemFromArray(taskListArray, index);
@@ -194,15 +151,18 @@ const renderTask = (task) => {
 		// refreshRenders();
 		updateEmpty();
 		// getFromLocalStorage(id);
-		console.log("Button clicked");
+		// console.log("Button clicked");
 	});
 
+	// studyButton.setAttribute("onclick", OpenStudyMode());
 	studyButton.addEventListener("click", (e) => {
 		e.preventDefault();
 		let id = e.target.parentElement.getAttribute("data-id");
+		const key = "Task: " + id.toString();
+		StudyMode.openStudyMode(JSON.parse(localStorage.getItem(key)));
 		// studyModeContainer.style.display = "block";
 		// taskViewer.style.display = "none";
-		console.log(id);
+		// console.log(id);
 	});
 
 	taskListContainer.appendChild(item);
@@ -214,7 +174,7 @@ const updateEmpty = () => {
 	counter = 0;
 	for (let i = 0; i < localStorage.length; i++) {
 		const currentKey = localStorage.key("i");
-		console.log(currentKey);
+		// console.log(currentKey);
 		if (currentKey.slice(0, 5) === "Task:") {
 			counter += 1;
 		}
@@ -233,7 +193,7 @@ const updateEmpty = () => {
 export const addToLocalStorage = (task) => {
 	localStorage.setItem("Task: " + task.id.toString(), JSON.stringify(task));
 
-	console.log("Task: " + task.id.toString());
+	// console.log("Task: " + task.id.toString());
 };
 
 export const getFromLocalStorage = (taskId) => {
