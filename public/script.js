@@ -31,6 +31,7 @@ const taskDescriptionInput = document.getElementById("description");
 // const taskListContainer = document.getElementById("taskListNew");
 
 addTaskForm.addEventListener("submit", (e) => {
+	console.log("random");
 	e.preventDefault();
 	let taskName = taskNameInput.value;
 	let priority = priorityInput.value;
