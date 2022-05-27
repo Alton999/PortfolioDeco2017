@@ -25,6 +25,10 @@
 						<p class="taskLabel">Subject: </p>
 						<p id="subjectE"></p>
 					</section>
+					<section class="headerContainer">
+						<p class="taskLabel">Date created: </p>
+						<p id="dateCreatedE"></p>
+					</section>
 					<!-- Header of each item -->
 					<section id="barHeader">
 						<div>
@@ -43,19 +47,22 @@
 					
 					<!-- Value of each item -->
 					<section id="barContents">
-						<div >
-							<p id="difficultyStudy"></p>
+						<div id="difficultyStudy">
 						</div>
-						<div>
-							<p id="elapsedDuration"></p>
+						<div id="elapsedDuration">
 						</div>
-						<div>
-							<p id="estimatedDuration"></p>
+						<div id="estimatedDuration">
 						</div>
-						<div>
-							<p id="interruptionsCounter"></p>
+						<div id="interruptionsCounter">
 						</div>
 					</section>
+				</section>
+
+				<!-- Container containing buttons -->
+				<section class="container actionButtonContainer">
+					<button id="startSession">Start Session</button>
+					<button id="pauseSession">Pause Session</button>
+					<button id="endSession">Finish Task</button>
 				</section>
 			</section>
 			<!-- Section that shows the different tasks that you have created -->
@@ -84,7 +91,6 @@
 						</div>
 
 						<ul id="taskListProgress">
-							<p id="emptyListText">You have not added any tasks yet.</p>
 							<!-- Individual task card -->
 						
 						</ul>
@@ -96,7 +102,6 @@
 						</div>
 
 						<ul id="taskListCompleted">
-							<p id="emptyListText">You have not added any tasks yet.</p>
 							<!-- Individual task card -->
 						
 						</ul>

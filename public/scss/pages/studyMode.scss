@@ -1,5 +1,5 @@
 #studyMode {
-	background-color: bisque;
+	// background-color: bisque;
 	.container {
 		width: 40%;
 		display: flex;
@@ -9,6 +9,7 @@
 			display: flex;
 			flex-direction: row;
 			font-size: 1.3em;
+			height: 50px;
 			.taskLabel {
 				font-weight: 600;
 				margin-right: 10px;
@@ -18,6 +19,7 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: space-around;
+			margin-top: 60px;
 			div {
 				width: 25%;
 				text-align: center;
@@ -40,9 +42,60 @@
 				justify-content: center;
 				width: 25%;
 				border: 2px solid black;
-				p {
-					font-size: 1em;
-				}
+				font-size: 1em;
+			}
+			// Changes the colour of the container based on class combinations
+			.greenBar {
+				background-color: rgba(39, 174, 96, 1);
+			}
+			.redBar {
+				background-color: rgba(192, 57, 43, 1);
+				color: white;
+			}
+			.neutralBar {
+				background-color: rgba(230, 126, 34, 1);
+				color: white;
+			}
+		}
+	}
+	.actionButtonContainer {
+		margin-top: 1.25em;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		button {
+			cursor: pointer;
+			padding: 20px 40px;
+			border-radius: 5px;
+			border: none;
+			font-size: 20px;
+			font-weight: 700;
+			color: white;
+			transition-duration: 0.4s;
+		}
+
+		#startSession {
+			background-color: rgba(39, 174, 96, 1);
+			box-shadow: 4px 4px 0px #1f8449;
+			&:hover {
+				transform: translate3d(10px, 5px, 0px);
+				box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
+			}
+		}
+		#pauseSession {
+			background: #f39c12;
+			box-shadow: 4px 4px 0px #e67e22;
+			&:hover {
+				transform: translate3d(10px, 5px, 0px);
+				box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
+			}
+		}
+		#endSession {
+			background: #3498db;
+			box-shadow: 4px 4px 0px #2d75a5;
+			&:hover {
+				transform: translate3d(10px, 5px, 0px);
+				box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
 			}
 		}
 	}

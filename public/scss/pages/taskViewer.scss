@@ -123,17 +123,16 @@
 			}
 			.delButton {
 				color: #c0392b;
+				margin-left: 10%;
+				width: 40%;
 				&:hover {
 					background-color: #c0392b;
 					color: white;
 				}
 			}
 			.studyButton {
-				color: #27ae60;
-				&:hover {
-					background-color: #27ae60;
-					color: white;
-				}
+				background-color: #27ae60;
+				color: white;
 			}
 			// Individual list items (task card)
 			.taskListItem {

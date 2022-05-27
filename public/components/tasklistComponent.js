@@ -3,38 +3,13 @@ import "./addTaskModalComponent";
 import * as StudyMode from "./studyMode";
 
 // // Task list
-const taskListContainer = document.getElementById("taskListNew");
+const taskListContainerNew = document.getElementById("taskListNew");
+const taskListContainerProgress = document.getElementById("taskListProgress");
 
 // Function that takes in parameters to create and return 1 task object
-export const createTaskObject = (
-	taskName,
-	priority,
-	difficulty,
-	subject,
-	hours,
-	minutes,
-	description
-) => {
-	let currentDate = new Date();
-	let day = currentDate.getDate().toString();
-	let month = (currentDate.getMonth() + 1).toString();
-	let year = currentDate.getFullYear().toString();
-
-	return {
-		id: Date.now(),
-		createdDate: day + " / " + month + " / " + year,
-		taskName,
-		priority,
-		difficulty,
-		subject,
-		estimatedDuration: hours + " hrs  " + minutes + " minutes",
-		description,
-		taskStatus: "new"
-	};
-};
 
 // Renders the current new task to the DOM
-const renderTask = (task) => {
+const renderTask = (task, renderContainer) => {
 	updateEmpty();
 
 	// console.log("From render", allTasks);
@@ -141,17 +116,11 @@ const renderTask = (task) => {
 	delButton.addEventListener("click", (e) => {
 		e.preventDefault();
 		let id = e.target.parentElement.getAttribute("data-id");
-		// console.log(id);
 		localStorage.removeItem("Task: " + id.toString());
-		// let index = taskListArray.findIndex((task) => task.id === Number(id));
-		// removeItemFromArray(taskListArray, index);
+
 		item.remove();
-		// addToLocalStorage(taskListArray);
-		// console.log(taskListArray);
-		// refreshRenders();
+
 		updateEmpty();
-		// getFromLocalStorage(id);
-		// console.log("Button clicked");
 	});
 
 	// studyButton.setAttribute("onclick", OpenStudyMode());
@@ -159,14 +128,14 @@ const renderTask = (task) => {
 		e.preventDefault();
 		let id = e.target.parentElement.getAttribute("data-id");
 		const key = "Task: " + id.toString();
-		StudyMode.openStudyMode(JSON.parse(localStorage.getItem(key)));
+		StudyMode.openStudyMode(key);
 		// studyModeContainer.style.display = "block";
 		// taskViewer.style.display = "none";
 		// console.log(id);
 	});
 
-	taskListContainer.appendChild(item);
-
+	renderContainer.appendChild(item);
+	console.log(renderContainer);
 	// addTaskForm.reset();
 };
 
@@ -192,13 +161,20 @@ const updateEmpty = () => {
 // Add to local storage capability
 export const addToLocalStorage = (task) => {
 	localStorage.setItem("Task: " + task.id.toString(), JSON.stringify(task));
-
-	// console.log("Task: " + task.id.toString());
 };
 
-export const getFromLocalStorage = (taskId) => {
-	const key = "Task: " + taskId.toString();
-	renderTask(JSON.parse(localStorage.getItem(key)));
+export const getAndRenderFromLocalStorage = (key) => {
+	let task = JSON.parse(localStorage.getItem(key));
+	// console.log(key);
+	// Checks to see where the progress of the items are;
+	if (task.taskStatus === "new") {
+		renderTask(task, taskListContainerNew);
+	} else if (task.taskStatus === "In progress") {
+		renderTask(task, taskListContainerProgress);
+	} else {
+		console.log("Unknown placement of item, rendered to new tasks");
+		renderTask(task, taskListContainerNew);
+	}
 };
 
 // renders all elements after refresh
@@ -208,8 +184,9 @@ window.onload = (e) => {
 	updateEmpty();
 	for (const key in localStorage) {
 		// console.log(key, key.slice(0))
+		// Checks if keys is related to tasks
 		if (key.slice(0, 5) === "Task:") {
-			renderTask(JSON.parse(localStorage.getItem(key)));
+			getAndRenderFromLocalStorage(key);
 		}
 	}
 };

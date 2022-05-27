@@ -18,42 +18,47 @@ const taskViewer = document.getElementById("taskViewer");
 const addTaskForm = document.getElementById("taskForm");
 // const addTaskButton = document.querySelector("#taskForm > button");
 
-// Add task input fields
-const taskNameInput = document.getElementById("taskName");
-const priorityInput = document.getElementById("priority");
-const difficultyInput = document.getElementById("difficulty");
-const subjectInput = document.getElementById("subject");
-const hoursInput = document.getElementById("hours");
-const minutesInput = document.getElementById("minutes");
-const taskDescriptionInput = document.getElementById("description");
-
 // Task list
 // const taskListContainer = document.getElementById("taskListNew");
 
 addTaskForm.addEventListener("submit", (e) => {
-	console.log("random");
+	// Add task input fields
 	e.preventDefault();
-	let taskName = taskNameInput.value;
-	let priority = priorityInput.value;
-	let difficulty = difficultyInput.value;
-	let subject = subjectInput.value;
-	let hours = hoursInput.value;
-	let minutes = minutesInput.value;
-	let description = taskDescriptionInput.value;
-	let task = TaskList.createTaskObject(
-		taskName,
-		priority,
-		difficulty,
-		subject,
-		hours,
-		minutes,
-		description
-	);
+	let taskNameInput = document.getElementById("taskName").value;
+	let priorityInput = document.getElementById("priority").value;
+	let difficultyInput = document.getElementById("difficulty").value;
+	let subjectInput = document.getElementById("subject").value;
+	let hoursInput = document.getElementById("hours").value;
+	let minutesInput = document.getElementById("minutes").value;
+	let taskDescriptionInput = document.getElementById("description").value;
+	let currentDate = new Date();
+	let day = currentDate.getDate().toString();
+	let month = (currentDate.getMonth() + 1).toString();
+	let year = currentDate.getFullYear().toString();
+
+	let task = {
+		id: Date.now(),
+		createdDate: day + " / " + month + " / " + year,
+		taskName: taskNameInput,
+		priority: priorityInput,
+		difficulty: difficultyInput,
+		subject: subjectInput,
+		estimatedDuration: hoursInput + " hrs  " + minutesInput + " minutes",
+		description: taskDescriptionInput,
+		taskStatus: "new",
+		elapsedHoursSaved: 0,
+		elapsedMinutesSaved: 0,
+		elapsedSecondsSaved: 0,
+		interruptionCounter: 0,
+		estimatedHours: hoursInput,
+		estimatedMinutes: minutesInput
+	};
 
 	// Adds the task list array to the local storage object as a key and value pair
 	TaskList.addToLocalStorage(task);
-	TaskList.getFromLocalStorage(task.id);
-	// renderTasks(getFromLocalStorage());
+
+	TaskList.getAndRenderFromLocalStorage(`Task: ${task.id}`);
+
 	addTaskForm.reset();
 });
 
