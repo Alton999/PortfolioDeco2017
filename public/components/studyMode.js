@@ -35,10 +35,24 @@ const editTaskInStorage = (key, field, newValue) => {
 		console.log("Task not found in edit task in storage");
 	}
 };
+
+const disablePause = (isPausedDisabled) => {
+	if (isPausedDisabled == true) {
+		pauseButton.disabled = true;
+		pauseButton.classList.add("disabledButton");
+		console.log("Pause is disabled");
+	} else {
+		pauseButton.disabled = false;
+		pauseButton.classList.remove("disabledButton");
+		console.log("Button is enabled");
+	}
+};
+
 export const openStudyMode = (key) => {
 	// This function takes in the item key and changes the chosen field with the new value
 	let taskObject = JSON.parse(localStorage.getItem(key));
 	Navigation.navigateToPage(taskViewer, studyModeContainer);
+
 	// Create a is running variable to check if its running to disable the pause button
 	let isRunning = false;
 	// let interruptionCounter = taskObject.interruptionCounter;
@@ -51,15 +65,22 @@ export const openStudyMode = (key) => {
 	dateCreatedE.innerHTML = taskObject.createdDate;
 	elapsedDurationE.innerHTML = `${taskObject.elapsedHoursSaved} hrs 0${taskObject.elapsedMinutesSaved} minutes`;
 	interruptionsCounterE.innerHTML = taskObject.interruptionCounter.toString();
+	let currentSessionCounter = 0;
+	let isPauseDisabled = true;
 	let [seconds, elapsedMinutes, elapsedHours] = [0, 0, 0];
 	let counter = null;
 
+	// Check if pause button should be disabled
+	disablePause(isPauseDisabled);
 	// https://www.foolishdeveloper.com/2021/10/simple-stopwatch-using-javascript.html
+
+	// Button event listeners
 	startButton.addEventListener("click", () => {
 		if (counter !== null) {
 			clearInterval(counter);
 		}
 		counter = setInterval(runTimer, 1000);
+		// disablePause(isPauseDisabled);
 		isRunning = true;
 	});
 
@@ -78,6 +99,10 @@ export const openStudyMode = (key) => {
 				taskObject.interruptionCounter
 			);
 
+			currentSessionCounter = 0;
+
+			isPauseDisabled = true;
+			disablePause(isPauseDisabled);
 			isRunning = false;
 		}
 
@@ -86,6 +111,16 @@ export const openStudyMode = (key) => {
 
 	const runTimer = () => {
 		seconds++;
+		currentSessionCounter++;
+		disablePause(isPauseDisabled);
+		// Checking when to enable to pause button
+
+		// 600 = 10 mins
+		if (currentSessionCounter == 20) {
+			isPauseDisabled = false;
+			disablePause(isPauseDisabled);
+		}
+
 		if (seconds == 60) {
 			seconds = 0;
 			elapsedMinutes++;
@@ -107,6 +142,6 @@ export const openStudyMode = (key) => {
 
 		// Now I need to check if task is either in progress or finished or new
 		editTaskInStorage(taskObject.id, "taskStatus", "In progress");
-		console.log(seconds);
+		// console.log(seconds);
 	};
 };

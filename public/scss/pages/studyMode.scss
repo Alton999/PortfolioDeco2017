@@ -76,27 +76,35 @@
 
 		#startSession {
 			background-color: rgba(39, 174, 96, 1);
-			box-shadow: 4px 4px 0px #1f8449;
+			// box-shadow: 4px 4px 0px #1f8449;
 			&:hover {
-				transform: translate3d(10px, 5px, 0px);
-				box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
+				background-color: #1f8449;
+				// transform: translate3d(10px, 5px, 0px);
+				// box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
 			}
 		}
 		#pauseSession {
 			background: #f39c12;
-			box-shadow: 4px 4px 0px #e67e22;
+			// box-shadow: 4px 4px 0px #e67e22;
 			&:hover {
-				transform: translate3d(10px, 5px, 0px);
-				box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
+				background-color: #e67e22;
+				// transform: translate3d(10px, 5px, 0px);
+				// box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
 			}
 		}
 		#endSession {
 			background: #3498db;
-			box-shadow: 4px 4px 0px #2d75a5;
+			// box-shadow: 4px 4px 0px #2d75a5;
 			&:hover {
-				transform: translate3d(10px, 5px, 0px);
-				box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
+				background-color: #2d75a5;
+				// transform: translate3d(10px, 5px, 0px);
+				// box-shadow: 0 0 0 rgba(26, 188, 156, 0.5);
 			}
+		}
+
+		#pauseSession.disabledButton {
+			pointer-events: none;
+			background-color: grey;
 		}
 	}
 }

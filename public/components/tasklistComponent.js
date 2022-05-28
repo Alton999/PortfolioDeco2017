@@ -13,7 +13,7 @@ const renderTask = (task, renderContainer) => {
 	updateEmpty();
 
 	// console.log("From render", allTasks);
-	// Everytime the render tasks function is called we would want to loop over the array and display all values in our local storage
+	// Every time the render tasks function is called we would want to loop over the array and display all values in our local storage
 	console.log(task.difficulty);
 	const item = document.createElement("li");
 	item.setAttribute("data-id", task.id);
@@ -28,7 +28,7 @@ const renderTask = (task, renderContainer) => {
 	const taskDetailsContainer = document.createElement("div");
 	taskDetailsContainer.classList.add("taskDetails");
 
-	// Manipulate the HTML structure of task deatils container to suit the needs of this list
+	// Manipulate the HTML structure of task details container to suit the needs of this list
 	taskDetailsContainer.innerHTML = `
 			<ul>
 				<li>
@@ -144,8 +144,14 @@ const updateEmpty = () => {
 	for (let i = 0; i < localStorage.length; i++) {
 		const currentKey = localStorage.key("i");
 		// console.log(currentKey);
+
+		let taskStatus = JSON.parse(localStorage.getItem(currentKey)).taskStatus;
+		// Checks if its actually a task item in the local storage
 		if (currentKey.slice(0, 5) === "Task:") {
-			counter += 1;
+			// Needs to check if there is any items in the new category
+			if (taskStatus === "new") {
+				counter += 1;
+			}
 		}
 	}
 	// console.log(counter);
