@@ -11,6 +11,7 @@
 		<main>
 			<button id="studyModeToggle">Study Mode</button>
 			<button id="taskViewerToggle">Task Viewer Mode</button>
+			<button id="flowTimeTrackerToggle">Flow Time Tracker</button>
 			<section id="studyMode">
 				<h1>Study Mode</h1>
 				<!-- Bar containing details of task selected -->
@@ -184,6 +185,39 @@
 							<button type="submit">Add Task</button>
 						</div>
 					</form>
+				</section>
+			</section>
+
+			<section id="flowTimeTracker">
+				<h1>Flow Time Tracker</h1>
+				
+				<section id="trackerContainer">
+					<table>
+						<tr>
+							<th>Created Date:</th>
+							<th>Completed Date:</th>
+							<th>Turnover:</th>
+							<th>Task:</th>
+							<th>Subject:</th>
+							<th>Total Duration:</th>
+							<th>Break counter:</th>
+							<th>Total Break duration:</th>
+							<th>Flow Efficiency:</th>
+						</tr>
+
+						<!-- This is what needs to be created when a task is completed -->
+						<tr>
+							<td>14/04/2022</td>
+							<td>16/04/2022</td>
+							<td>2 days</td>
+							<td>Conduct User Research</td>
+							<td>DECO2017</td>
+							<td>2 hrs 45 mins</td>
+							<td>2</td>
+							<td>0 hr 45 mins</td>
+							<td class="flowEff">72%</td>
+						</tr>
+					</table>
 				</section>
 			</section>
 		</main>

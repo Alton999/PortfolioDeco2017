@@ -1,0 +1,35 @@
+#flowTimeTracker {
+	#trackerContainer {
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+		td,
+		th {
+			text-align: left;
+			padding: 16px 8px;
+		}
+		th {
+			font-size: 1.2em;
+			font-weight: 400;
+		}
+		td {
+			border-top: 1px solid #dddddd;
+			border-bottom: 1px solid #dddddd;
+			font-weight: 600;
+		}
+
+		tr {
+			td:nth-last-child(2) {
+				border-right: 2.5px solid rgba(199, 199, 199, 0.6);
+			}
+		}
+
+		.flowEff {
+			color: rgba(31, 132, 73, 1);
+			font-weight: 600;
+			font-size: 1.5em;
+			text-align: center;
+		}
+	}
+}

@@ -5,6 +5,7 @@ import * as StudyMode from "./studyMode";
 // // Task list
 const taskListContainerNew = document.getElementById("taskListNew");
 const taskListContainerProgress = document.getElementById("taskListProgress");
+const taskListContainerCompleted = document.getElementById("taskListCompleted");
 
 // Function that takes in parameters to create and return 1 task object
 
@@ -135,7 +136,7 @@ const renderTask = (task, renderContainer) => {
 	});
 
 	renderContainer.appendChild(item);
-	console.log(renderContainer);
+	// console.log(renderContainer);
 	// addTaskForm.reset();
 };
 
@@ -177,6 +178,8 @@ export const getAndRenderFromLocalStorage = (key) => {
 		renderTask(task, taskListContainerNew);
 	} else if (task.taskStatus === "In progress") {
 		renderTask(task, taskListContainerProgress);
+	} else if (task.taskStatus === "Completed") {
+		renderTask(task, taskListContainerCompleted);
 	} else {
 		console.log("Unknown placement of item, rendered to new tasks");
 		renderTask(task, taskListContainerNew);

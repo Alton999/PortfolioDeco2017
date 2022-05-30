@@ -2,16 +2,22 @@ import * as TaskList from "./components/tasklistComponent";
 
 import * as Navigation from "./components/navigation";
 
+import * as Tracker from "./components/flowTimeTracker";
+
 import "./components/studyMode";
+
+// import "./components/flowTimeTracker"
 
 // Initialisations
 
 // Navigation buttons
 const studyModeToggle = document.getElementById("studyModeToggle");
 const taskViewerToggle = document.getElementById("taskViewerToggle");
+const flowTimeTrackerToggle = document.getElementById("flowTimeTrackerToggle");
 
 // Task study mode components
 const studyModeContainer = document.getElementById("studyMode");
+const tracker = document.getElementById("flowTimeTracker");
 const taskViewer = document.getElementById("taskViewer");
 
 // Add task form
@@ -38,7 +44,10 @@ addTaskForm.addEventListener("submit", (e) => {
 
 	let task = {
 		id: Date.now(),
-		createdDate: day + " / " + month + " / " + year,
+		createdDay: day,
+		createdMonth: month,
+		createdYear: year,
+		createdDate: `${day}/${month}/${year}`,
 		taskName: taskNameInput,
 		priority: priorityInput,
 		difficulty: difficultyInput,
@@ -50,8 +59,10 @@ addTaskForm.addEventListener("submit", (e) => {
 		elapsedMinutesSaved: 0,
 		elapsedSecondsSaved: 0,
 		interruptionCounter: 0,
-		estimatedHours: hoursInput,
-		estimatedMinutes: minutesInput
+		// estimatedHours: hoursInput,
+		// estimatedMinutes: minutesInput,
+		completedDate: null,
+		turnAround: null
 	};
 
 	// Adds the task list array to the local storage object as a key and value pair
@@ -65,13 +76,26 @@ addTaskForm.addEventListener("submit", (e) => {
 // Set initially study mode to not appear
 studyModeContainer.style.display = "none";
 
+// Set initially for task tracker to not appear
+tracker.style.display = "none";
+
 // Add event listener for navigation buttons is here
 studyModeToggle.addEventListener("click", (e) => {
 	e.preventDefault();
 	Navigation.navigateToPage(taskViewer, studyModeContainer);
+	tracker.style.display = "none";
 });
 
 taskViewerToggle.addEventListener("click", (e) => {
 	e.preventDefault();
 	Navigation.navigateToPage(studyModeContainer, taskViewer);
+	tracker.style.display = "none";
 });
+
+flowTimeTrackerToggle.addEventListener("click", (e) => {
+	e.preventDefault();
+	Navigation.navigateToPage(taskViewer, tracker);
+	studyModeContainer.style.display = "none";
+});
+
+Tracker.openTracker();
