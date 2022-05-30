@@ -81,18 +81,39 @@
 		}
 		.taskContainerHeader {
 			text-align: center;
-			.underlineGlow.newTasks {
+			hr {
 				width: 70%;
 				height: 12px;
 				border: none;
-				border-radius: 5px;
+				border-radius: 0 0 5px 5px;
 				margin: 0 auto;
+			}
+			.underlineGlow.newTasks {
 				background: linear-gradient(
 					to right,
 					rgba(192, 57, 43, 100),
 					rgba(186, 33, 33, 80)
 				);
+				box-shadow: 0px 3px 4px rgba(218, 73, 27, 0.5);
 			}
+
+			.underlineGlow.progressTask {
+				background: linear-gradient(
+					270deg,
+					rgba(230, 126, 34, 0.8) 0%,
+					rgba(192, 57, 43, 0.8) 99.99%
+				);
+				box-shadow: 0px 3px 4px rgba(243, 156, 18, 0.5);
+			}
+			.underlineGlow.completedTask {
+				background: linear-gradient(
+					270deg,
+					rgba(46, 204, 113, 0.8) 0%,
+					rgba(22, 160, 133, 0.8) 99.99%
+				);
+				box-shadow: 0px 3px 4px rgba(46, 204, 113, 0.5);
+			}
+
 			background-color: #2c3e50;
 			h3 {
 				padding: 20px 40px;

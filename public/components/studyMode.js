@@ -18,36 +18,6 @@ let startButton = document.getElementById("startSession");
 let pauseButton = document.getElementById("pauseSession");
 let endSession = document.getElementById("endSession");
 
-const editTaskInStorage = (key, field, newValue) => {
-	const tempKey = "Task: " + key.toString();
-
-	if (tempKey in localStorage) {
-		let task = JSON.parse(localStorage.getItem(tempKey));
-		if (field in task) {
-			task[field] = newValue;
-			// Set the new value
-			localStorage.setItem(tempKey, JSON.stringify(task));
-			// console.log(task);
-		} else {
-			console.log("Field does not exist in task");
-		}
-	} else {
-		console.log("Task not found in edit task in storage");
-	}
-};
-
-const disablePause = (isPausedDisabled) => {
-	if (isPausedDisabled == true) {
-		pauseButton.disabled = true;
-		pauseButton.classList.add("disabledButton");
-		console.log("Pause is disabled");
-	} else {
-		pauseButton.disabled = false;
-		pauseButton.classList.remove("disabledButton");
-		console.log("Button is enabled");
-	}
-};
-
 export const openStudyMode = (key) => {
 	// This function takes in the item key and changes the chosen field with the new value
 	let taskObject = JSON.parse(localStorage.getItem(key));
@@ -109,6 +79,8 @@ export const openStudyMode = (key) => {
 		// console.log(interruptionCounter);
 	});
 
+	endSession.addEventListener("click", () => {});
+
 	const runTimer = () => {
 		seconds++;
 		currentSessionCounter++;
@@ -144,4 +116,34 @@ export const openStudyMode = (key) => {
 		editTaskInStorage(taskObject.id, "taskStatus", "In progress");
 		// console.log(seconds);
 	};
+};
+
+const editTaskInStorage = (key, field, newValue) => {
+	const tempKey = "Task: " + key.toString();
+
+	if (tempKey in localStorage) {
+		let task = JSON.parse(localStorage.getItem(tempKey));
+		if (field in task) {
+			task[field] = newValue;
+			// Set the new value
+			localStorage.setItem(tempKey, JSON.stringify(task));
+			// console.log(task);
+		} else {
+			console.log("Field does not exist in task");
+		}
+	} else {
+		console.log("Task not found in edit task in storage");
+	}
+};
+
+const disablePause = (isPausedDisabled) => {
+	if (isPausedDisabled == true) {
+		pauseButton.disabled = true;
+		pauseButton.classList.add("disabledButton");
+		console.log("Pause is disabled");
+	} else {
+		pauseButton.disabled = false;
+		pauseButton.classList.remove("disabledButton");
+		console.log("Button is enabled");
+	}
 };
