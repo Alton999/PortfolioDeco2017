@@ -147,6 +147,7 @@ const updateEmpty = () => {
 		// console.log(currentKey);
 
 		let taskStatus = JSON.parse(localStorage.getItem(currentKey)).taskStatus;
+		console.log(currentKey);
 		// Checks if its actually a task item in the local storage
 		if (currentKey.slice(0, 5) === "Task:") {
 			// Needs to check if there is any items in the new category
@@ -155,13 +156,13 @@ const updateEmpty = () => {
 			}
 		}
 	}
-	// console.log(counter);
+	console.log(counter);
 	if (counter > 0) {
 		document.getElementById("emptyListText").style.display = "none";
-		// console.log("more than 0 elements ");
+		console.log("more than 0 elements ");
 	} else {
 		document.getElementById("emptyListText").style.display = "block";
-		// console.log("0elements ");
+		console.log("0elements ");
 	}
 };
 

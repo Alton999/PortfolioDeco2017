@@ -94,8 +94,9 @@ taskViewerToggle.addEventListener("click", (e) => {
 
 flowTimeTrackerToggle.addEventListener("click", (e) => {
 	e.preventDefault();
-	Navigation.navigateToPage(taskViewer, tracker);
-	studyModeContainer.style.display = "none";
+	Tracker.openTracker();
+	// Navigation.navigateToPage(taskViewer, tracker);
+	// studyModeContainer.style.display = "none";
 });
 
-Tracker.openTracker();
+// Tracker.openTracker();
