@@ -3,9 +3,9 @@ import "./addTaskModalComponent";
 import * as StudyMode from "./studyMode";
 
 // // Task list
-const taskListContainerNew = document.getElementById("taskListNew");
-const taskListContainerProgress = document.getElementById("taskListProgress");
-const taskListContainerCompleted = document.getElementById("taskListCompleted");
+let taskListContainerNew = document.getElementById("taskListNew");
+let taskListContainerProgress = document.getElementById("taskListProgress");
+let taskListContainerCompleted = document.getElementById("taskListCompleted");
 
 // Function that takes in parameters to create and return 1 task object
 
@@ -15,7 +15,7 @@ const renderTask = (task, renderContainer) => {
 
 	// console.log("From render", allTasks);
 	// Every time the render tasks function is called we would want to loop over the array and display all values in our local storage
-	console.log(task.difficulty);
+	// console.log(task.difficulty);
 	const item = document.createElement("li");
 	item.setAttribute("data-id", task.id);
 	// Add the css class to the item container
@@ -143,26 +143,28 @@ const renderTask = (task, renderContainer) => {
 const updateEmpty = () => {
 	counter = 0;
 	for (let i = 0; i < localStorage.length; i++) {
-		const currentKey = localStorage.key("i");
-		// console.log(currentKey);
-
-		let taskStatus = JSON.parse(localStorage.getItem(currentKey)).taskStatus;
+		let currentKey = localStorage.key(i);
 		console.log(currentKey);
+		// console.log(localStorage.getItem(currentKey));
 		// Checks if its actually a task item in the local storage
 		if (currentKey.slice(0, 5) === "Task:") {
+			let taskStatus = JSON.parse(localStorage.getItem(currentKey)).taskStatus;
+
 			// Needs to check if there is any items in the new category
 			if (taskStatus === "new") {
+				console.log("Found new");
 				counter += 1;
+			} else {
 			}
 		}
 	}
 	console.log(counter);
 	if (counter > 0) {
 		document.getElementById("emptyListText").style.display = "none";
-		console.log("more than 0 elements ");
+		// console.log("more than 0 elements ");
 	} else {
 		document.getElementById("emptyListText").style.display = "block";
-		console.log("0elements ");
+		// console.log("0elements ");
 	}
 };
 
