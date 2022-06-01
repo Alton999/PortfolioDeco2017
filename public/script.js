@@ -11,7 +11,7 @@ import "./components/studyMode";
 // Initialisations
 
 // Navigation buttons
-const studyModeToggle = document.getElementById("studyModeToggle");
+// const studyModeToggle = document.getElementById("studyModeToggle");
 const taskViewerToggle = document.getElementById("taskViewerToggle");
 const flowTimeTrackerToggle = document.getElementById("flowTimeTrackerToggle");
 
@@ -59,10 +59,9 @@ addTaskForm.addEventListener("submit", (e) => {
 		elapsedMinutesSaved: 0,
 		elapsedSecondsSaved: 0,
 		interruptionCounter: 0,
-		// estimatedHours: hoursInput,
-		// estimatedMinutes: minutesInput,
 		completedDate: null,
-		turnAround: null
+		turnAround: null,
+		breakDuration: `0 hr 00 min`
 	};
 
 	// Adds the task list array to the local storage object as a key and value pair
@@ -80,23 +79,20 @@ studyModeContainer.style.display = "none";
 tracker.style.display = "none";
 
 // Add event listener for navigation buttons is here
-studyModeToggle.addEventListener("click", (e) => {
-	e.preventDefault();
-	Navigation.navigateToPage(taskViewer, studyModeContainer);
-	tracker.style.display = "none";
-});
+// studyModeToggle.addEventListener("click", (e) => {
+// 	e.preventDefault();
+// 	Navigation.navigateToPage(taskViewer, studyModeContainer);
+// 	tracker.style.display = "none";
+// });
 
 taskViewerToggle.addEventListener("click", (e) => {
 	e.preventDefault();
 	Navigation.navigateToPage(studyModeContainer, taskViewer);
 	tracker.style.display = "none";
+	location.reload();
 });
 
 flowTimeTrackerToggle.addEventListener("click", (e) => {
 	e.preventDefault();
 	Tracker.openTracker();
-	// Navigation.navigateToPage(taskViewer, tracker);
-	// studyModeContainer.style.display = "none";
 });
-
-// Tracker.openTracker();

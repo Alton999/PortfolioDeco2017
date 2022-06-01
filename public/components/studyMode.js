@@ -15,6 +15,8 @@ let elapsedDurationE = document.getElementById("elapsedDuration");
 
 let estimatedDurationE = document.getElementById("estimatedDuration");
 let interruptionsCounterE = document.getElementById("interruptionsCounter");
+let totalBreakDurationE = document.getElementById("totalBreakDuration");
+
 let dateCreatedE = document.getElementById("dateCreatedE");
 let startButton = document.getElementById("startSession");
 let pauseButton = document.getElementById("pauseSession");
@@ -27,6 +29,7 @@ export const openStudyMode = (key) => {
 
 	// Create a is running variable to check if its running to disable the pause button
 	let isRunning = false;
+
 	// let interruptionCounter = taskObject.interruptionCounter;
 
 	// Manipulate the DOM to display the current task
@@ -37,10 +40,14 @@ export const openStudyMode = (key) => {
 	dateCreatedE.innerHTML = taskObject.createdDate;
 	elapsedDurationE.innerHTML = `${taskObject.elapsedHoursSaved} hrs 0${taskObject.elapsedMinutesSaved} minutes`;
 	interruptionsCounterE.innerHTML = taskObject.interruptionCounter.toString();
+	totalBreakDurationE.innerHTML = taskObject.breakDuration;
+
 	let currentSessionCounter = 0;
 	let isPauseDisabled = true;
 	let [seconds, elapsedMinutes, elapsedHours] = [0, 0, 0];
+	let [breakSeconds, breakMinutes, breakHours] = [0, 0, 0];
 	let counter = null;
+	let breakCounter = null;
 
 	// Check if pause button should be disabled
 	disablePause(isPauseDisabled);
@@ -48,6 +55,7 @@ export const openStudyMode = (key) => {
 
 	// Button event listeners
 	startButton.addEventListener("click", () => {
+		clearInterval(breakCounter);
 		if (counter !== null) {
 			clearInterval(counter);
 		}
@@ -75,6 +83,11 @@ export const openStudyMode = (key) => {
 
 			isPauseDisabled = true;
 			disablePause(isPauseDisabled);
+			if (breakCounter !== null) {
+				clearInterval(breakCounter);
+			}
+			breakCounter = setInterval(runPauseTimer, 1000);
+			// runPauseTimer();
 			isRunning = false;
 		}
 
@@ -85,6 +98,7 @@ export const openStudyMode = (key) => {
 		// If users end session before pressing pause we need to stop the current session
 		isRunning = false;
 		clearInterval(counter);
+		clearInterval(breakCounter);
 		// Changes the status of the item when they press finish task
 		// We need to save the completed date
 		let currentDate = new Date();
@@ -127,6 +141,24 @@ export const openStudyMode = (key) => {
 		Tracker.openTracker();
 	});
 
+	const runPauseTimer = () => {
+		breakSeconds++;
+		if (breakSeconds == 60) {
+			breakSeconds = 0;
+			breakMinutes++;
+			if (breakMinutes == 60) {
+				breakMinutes = 0;
+				breakHours++;
+			}
+		}
+		console.log(breakSeconds, breakMinutes);
+		let m = breakMinutes < 10 ? "0" + breakMinutes : breakMinutes;
+		let currentBreakDuration = `${breakHours} hrs ${m} mins ${breakSeconds} secs`;
+		console.log(currentBreakDuration);
+		totalBreakDurationE.innerHTML = taskObject.currentBreakDuration;
+		editTaskInStorage(taskObject.id, "breakDuration", currentBreakDuration);
+	};
+
 	const runTimer = () => {
 		seconds++;
 		currentSessionCounter++;
@@ -153,6 +185,7 @@ export const openStudyMode = (key) => {
 		let m = elapsedMinutes < 10 ? "0" + elapsedMinutes : elapsedMinutes;
 
 		elapsedDurationE.innerHTML = `${elapsedHours} hrs ${m} minutes`;
+
 		// Update elapsed duration
 		editTaskInStorage(taskObject.id, "elapsedHoursSaved", elapsedHours);
 		editTaskInStorage(taskObject.id, "elapsedMinutesSaved", elapsedMinutes);
