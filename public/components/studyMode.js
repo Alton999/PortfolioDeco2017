@@ -64,6 +64,7 @@ export const openStudyMode = (key) => {
 
 	let currentSessionCounter = 0;
 	let isPauseDisabled = true;
+	let isEndDisabled = true;
 
 	let [seconds, elapsedMinutes, elapsedHours] = [
 		taskObject.elapsedSecondsSaved,
@@ -80,7 +81,8 @@ export const openStudyMode = (key) => {
 	let breakCounter = null;
 
 	// Check if pause button should be disabled
-	disablePause(isPauseDisabled);
+	disableButton(isPauseDisabled, pauseButton);
+	disableButton(isEndDisabled, endSession);
 	// https://www.foolishdeveloper.com/2021/10/simple-stopwatch-using-javascript.html
 
 	// Button event listeners
@@ -112,7 +114,8 @@ export const openStudyMode = (key) => {
 			currentSessionCounter = 0;
 
 			isPauseDisabled = true;
-			disablePause(isPauseDisabled);
+			disableButton(isPauseDisabled, pauseButton);
+
 			if (breakCounter !== null) {
 				clearInterval(breakCounter);
 			}
@@ -164,7 +167,6 @@ export const openStudyMode = (key) => {
 		}
 
 		let date = `${day}/${month}/${year}`;
-		console.log(turnaroundTime);
 		editTaskInStorage(taskObject.id, "completedDate", date);
 		editTaskInStorage(taskObject.id, "turnAround", turnaroundTime);
 		editTaskInStorage(taskObject.id, "taskStatus", "Completed");
@@ -197,13 +199,17 @@ export const openStudyMode = (key) => {
 	const runTimer = () => {
 		seconds++;
 		currentSessionCounter++;
-		disablePause(isPauseDisabled);
+		disableButton(isPauseDisabled, pauseButton);
+		disableButton(isEndDisabled, endSession);
+
 		// Checking when to enable to pause button
 
 		// 600 = 10 mins
 		if (currentSessionCounter == 20) {
 			isPauseDisabled = false;
-			disablePause(isPauseDisabled);
+			isEndDisabled = false;
+			disableButton(isPauseDisabled, pauseButton);
+			disableButton(isEndDisabled, endSession);
 		}
 
 		if (seconds == 60) {
@@ -254,14 +260,14 @@ const editTaskInStorage = (key, field, newValue) => {
 	}
 };
 
-const disablePause = (isPausedDisabled) => {
-	if (isPausedDisabled == true) {
-		pauseButton.disabled = true;
-		pauseButton.classList.add("disabledButton");
+const disableButton = (isButtonDisabled, buttonElement) => {
+	if (isButtonDisabled == true) {
+		buttonElement.disabled = true;
+		buttonElement.classList.add("disabledButton");
 		// console.log("Pause is disabled");
 	} else {
-		pauseButton.disabled = false;
-		pauseButton.classList.remove("disabledButton");
+		buttonElement.disabled = false;
+		buttonElement.classList.remove("disabledButton");
 		// console.log("Button is enabled");
 	}
 };

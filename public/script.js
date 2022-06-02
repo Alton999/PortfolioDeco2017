@@ -96,5 +96,8 @@ taskViewerToggle.addEventListener("click", (e) => {
 
 flowTimeTrackerToggle.addEventListener("click", (e) => {
 	e.preventDefault();
-	Tracker.openTracker();
+
+	if (tracker.style.display === "none") {
+		Tracker.openTracker();
+	}
 });

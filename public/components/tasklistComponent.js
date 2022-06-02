@@ -173,18 +173,20 @@ export const addToLocalStorage = (task) => {
 };
 
 export const getAndRenderFromLocalStorage = (key) => {
-	let task = JSON.parse(localStorage.getItem(key));
-	// console.log(key);
-	// Checks to see where the progress of the items are;
-	if (task.taskStatus === "new") {
-		renderTask(task, taskListContainerNew);
-	} else if (task.taskStatus === "In progress") {
-		renderTask(task, taskListContainerProgress);
-	} else if (task.taskStatus === "Completed") {
-		renderTask(task, taskListContainerCompleted);
-	} else {
-		console.log("Unknown placement of item, rendered to new tasks");
-		renderTask(task, taskListContainerNew);
+	if (key.slice(0, 5) === "Task:") {
+		let task = JSON.parse(localStorage.getItem(key));
+		// console.log(key);
+		// Checks to see where the progress of the items are;
+		if (task.taskStatus === "new") {
+			renderTask(task, taskListContainerNew);
+		} else if (task.taskStatus === "In progress") {
+			renderTask(task, taskListContainerProgress);
+		} else if (task.taskStatus === "Completed") {
+			renderTask(task, taskListContainerCompleted);
+		} else {
+			console.log("Unknown placement of item, rendered to new tasks");
+			renderTask(task, taskListContainerNew);
+		}
 	}
 };
 
@@ -196,8 +198,6 @@ window.onload = (e) => {
 	for (const key in localStorage) {
 		// console.log(key, key.slice(0))
 		// Checks if keys is related to tasks
-		if (key.slice(0, 5) === "Task:") {
-			getAndRenderFromLocalStorage(key);
-		}
+		getAndRenderFromLocalStorage(key);
 	}
 };
