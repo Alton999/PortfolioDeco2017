@@ -154,7 +154,6 @@ const updateEmpty = () => {
 			if (taskStatus === "new") {
 				// console.log("Found new");
 				counter += 1;
-			} else {
 			}
 		}
 	}

@@ -55,13 +55,27 @@ export const openStudyMode = (key) => {
 		taskObject.totalBreakMinutes < 10
 			? "0" + taskObject.totalBreakMinutes
 			: taskObject.totalBreakMinutes;
+	let breakS =
+		taskObject.totalBreakSeconds < 10
+			? "0" + taskObject.totalBreakSeconds
+			: taskObject.totalBreakSeconds;
 
-	totalBreakDurationE.innerHTML = `${taskObject.totalBreakHours}:${breakM}`;
+	totalBreakDurationE.innerHTML = `${taskObject.totalBreakHours}:${breakM}:${breakS}`;
 
 	let currentSessionCounter = 0;
 	let isPauseDisabled = true;
-	let [seconds, elapsedMinutes, elapsedHours] = [0, 0, 0];
-	let [breakSeconds, breakMinutes, breakHours] = [0, 0, 0];
+
+	let [seconds, elapsedMinutes, elapsedHours] = [
+		taskObject.elapsedSecondsSaved,
+		taskObject.elapsedMinutesSaved,
+		taskObject.elapsedHoursSaved
+	];
+
+	let [breakSeconds, breakMinutes, breakHours] = [
+		taskObject.totalBreakSeconds,
+		taskObject.totalBreakMinutes,
+		taskObject.totalBreakHours
+	];
 	let counter = null;
 	let breakCounter = null;
 
@@ -167,16 +181,17 @@ export const openStudyMode = (key) => {
 				breakHours++;
 			}
 		}
-		console.log(breakSeconds, breakMinutes);
+		// console.log(breakSeconds, breakMinutes);
 		let m = breakMinutes < 10 ? "0" + breakMinutes : breakMinutes;
 		let s = breakSeconds < 10 ? "0" + breakSeconds : breakSeconds;
 
 		let currentBreakDuration = `${breakHours}:${m}:${s}`;
-		console.log(currentBreakDuration);
-		totalBreakDurationE.innerHTML = taskObject.currentBreakDuration;
+		// console.log(currentBreakDuration);
+		totalBreakDurationE.innerHTML = currentBreakDuration;
 
 		editTaskInStorage(taskObject.id, "totalBreakMinutes", breakMinutes);
 		editTaskInStorage(taskObject.id, "totalBreakHours", breakHours);
+		editTaskInStorage(taskObject.id, "totalBreakSeconds", breakSeconds);
 	};
 
 	const runTimer = () => {
