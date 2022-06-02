@@ -61,7 +61,8 @@ addTaskForm.addEventListener("submit", (e) => {
 		interruptionCounter: 0,
 		completedDate: null,
 		turnAround: null,
-		breakDuration: `0 hr 00 min`
+		totalBreakMinutes: 0,
+		totalBreakHours: 0
 	};
 
 	// Adds the task list array to the local storage object as a key and value pair

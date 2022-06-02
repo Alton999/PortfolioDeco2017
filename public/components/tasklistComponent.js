@@ -144,7 +144,7 @@ const updateEmpty = () => {
 	counter = 0;
 	for (let i = 0; i < localStorage.length; i++) {
 		let currentKey = localStorage.key(i);
-		console.log(currentKey);
+		// console.log(currentKey);
 		// console.log(localStorage.getItem(currentKey));
 		// Checks if its actually a task item in the local storage
 		if (currentKey.slice(0, 5) === "Task:") {
@@ -152,13 +152,13 @@ const updateEmpty = () => {
 
 			// Needs to check if there is any items in the new category
 			if (taskStatus === "new") {
-				console.log("Found new");
+				// console.log("Found new");
 				counter += 1;
 			} else {
 			}
 		}
 	}
-	console.log(counter);
+	// console.log(counter);
 	if (counter > 0) {
 		document.getElementById("emptyListText").style.display = "none";
 		// console.log("more than 0 elements ");

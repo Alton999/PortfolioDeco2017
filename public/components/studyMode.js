@@ -38,9 +38,25 @@ export const openStudyMode = (key) => {
 	difficultyTextE.innerHTML = taskObject.difficulty;
 	estimatedDurationE.innerHTML = taskObject.estimatedDuration;
 	dateCreatedE.innerHTML = taskObject.createdDate;
-	elapsedDurationE.innerHTML = `${taskObject.elapsedHoursSaved} hrs 0${taskObject.elapsedMinutesSaved} minutes`;
+
+	let elapsedM =
+		taskObject.elapsedMinutesSaved < 10
+			? "0" + taskObject.elapsedMinutesSaved
+			: taskObject.elapsedMinutesSaved;
+	let elapsedS =
+		taskObject.elapsedSecondsSaved < 10
+			? "0" + taskObject.elapsedSecondsSaved
+			: taskObject.elapsedSecondsSaved;
+	elapsedDurationE.innerHTML = `${taskObject.elapsedHoursSaved}:${elapsedM}:${elapsedS}`;
+
 	interruptionsCounterE.innerHTML = taskObject.interruptionCounter.toString();
-	totalBreakDurationE.innerHTML = taskObject.breakDuration;
+
+	let breakM =
+		taskObject.totalBreakMinutes < 10
+			? "0" + taskObject.totalBreakMinutes
+			: taskObject.totalBreakMinutes;
+
+	totalBreakDurationE.innerHTML = `${taskObject.totalBreakHours}:${breakM}`;
 
 	let currentSessionCounter = 0;
 	let isPauseDisabled = true;
@@ -153,10 +169,14 @@ export const openStudyMode = (key) => {
 		}
 		console.log(breakSeconds, breakMinutes);
 		let m = breakMinutes < 10 ? "0" + breakMinutes : breakMinutes;
-		let currentBreakDuration = `${breakHours} hrs ${m} mins ${breakSeconds} secs`;
+		let s = breakSeconds < 10 ? "0" + breakSeconds : breakSeconds;
+
+		let currentBreakDuration = `${breakHours}:${m}:${s}`;
 		console.log(currentBreakDuration);
 		totalBreakDurationE.innerHTML = taskObject.currentBreakDuration;
-		editTaskInStorage(taskObject.id, "breakDuration", currentBreakDuration);
+
+		editTaskInStorage(taskObject.id, "totalBreakMinutes", breakMinutes);
+		editTaskInStorage(taskObject.id, "totalBreakHours", breakHours);
 	};
 
 	const runTimer = () => {
@@ -182,9 +202,13 @@ export const openStudyMode = (key) => {
 
 		// Created representative strings
 		// let h = elapsedHours < 10 ? "0" + elapsedHours : elapsedHours;
-		let m = elapsedMinutes < 10 ? "0" + elapsedMinutes : elapsedMinutes;
+		let elapsedM = elapsedMinutes < 10 ? "0" + elapsedMinutes : elapsedMinutes;
+		let elapsedS = seconds < 10 ? "0" + seconds : seconds;
 
-		elapsedDurationE.innerHTML = `${elapsedHours} hrs ${m} minutes`;
+		elapsedDurationE.innerHTML = `${elapsedHours}:${elapsedM}:${elapsedS}`;
+		// let m = elapsedMinutes < 10 ? "0" + elapsedMinutes : elapsedMinutes;
+
+		// elapsedDurationE.innerHTML = `${elapsedHours} hrs ${m} minutes ${seconds}`;
 
 		// Update elapsed duration
 		editTaskInStorage(taskObject.id, "elapsedHoursSaved", elapsedHours);
@@ -219,10 +243,10 @@ const disablePause = (isPausedDisabled) => {
 	if (isPausedDisabled == true) {
 		pauseButton.disabled = true;
 		pauseButton.classList.add("disabledButton");
-		console.log("Pause is disabled");
+		// console.log("Pause is disabled");
 	} else {
 		pauseButton.disabled = false;
 		pauseButton.classList.remove("disabledButton");
-		console.log("Button is enabled");
+		// console.log("Button is enabled");
 	}
 };
