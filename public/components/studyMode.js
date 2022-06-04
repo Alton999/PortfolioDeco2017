@@ -1,13 +1,15 @@
 import * as Navigation from "./navigation";
 import * as Tracker from "./flowTimeTracker";
+import "./addMaterialsModalComponent";
 
 const studyModeContainer = document.getElementById("studyMode");
 const taskViewer = document.getElementById("taskViewer");
-const tracker = document.getElementById("flowTimeTracker");
+// const tracker = document.getElementById("flowTimeTracker");
 
 //  E stands for element
 let taskNameDOM = document.getElementById("taskNameDOM");
 let subjectE = document.getElementById("subjectE");
+
 let difficultyTextE = document.getElementById("difficultyStudy");
 
 // Timer ref
@@ -22,15 +24,78 @@ let startButton = document.getElementById("startSession");
 let pauseButton = document.getElementById("pauseSession");
 let endSession = document.getElementById("endSession");
 
+// Getting the addMaterialsForm element
+let materialsForm = document.getElementById("materialForm");
+let pdfContainer = document.getElementById("pdfContainer");
+let articleContainer = document.getElementById("articleContainer");
+let bookContainer = document.getElementById("bookContainer");
+
 export const openStudyMode = (key) => {
 	// This function takes in the item key and changes the chosen field with the new value
 	let taskObject = JSON.parse(localStorage.getItem(key));
+	getAndRenderMaterials(key);
+	// Accesses the submit button and adds new study materials to the task.
+	materialsForm.addEventListener("submit", (e) => {
+		let category = document.getElementById("category").value;
+		let materialName = document.getElementById("materialName").value;
+		let reference = document.getElementById("materialReference").value;
+
+		let pageRange = null;
+		// Check if page range is empty
+		if (document.getElementById("pageStart").value !== "") {
+			pageRange = `${document.getElementById("pageStart").value} - ${
+				document.getElementById("pageEnd").value
+			}`;
+		}
+		let id = `${materialName}:${Date.now()}`;
+
+		e.preventDefault();
+		let materialObj = {
+			id: id,
+			category: category,
+			materialName: materialName,
+			reference: reference,
+			pageRange: pageRange
+		};
+
+		let materialsList = taskObject.totalMaterials;
+		materialsList.push(materialObj);
+
+		if (materialObj.category === "PDF") {
+			console.log("Rendered PDF");
+			renderMaterials(materialObj, pdfContainer);
+		} else if (materialObj.category === "Article") {
+			renderMaterials(materialObj, articleContainer);
+		} else if (materialObj.category === "Book") {
+			renderMaterials(materialObj, bookContainer);
+		}
+
+		// console.log(materialObj);
+		// console.log(materialsList);
+
+		editTaskInStorage(taskObject.id, "totalMaterials", materialsList);
+
+		// After pressing the submit button we want to render the elements
+
+		// getAndRenderMaterials(`Task: ${taskObject.id}`);
+		materialsForm.reset();
+	});
+
 	Navigation.navigateToPage(taskViewer, studyModeContainer);
 
 	// Create a is running variable to check if its running to disable the pause button
 	let isRunning = false;
 
-	// let interruptionCounter = taskObject.interruptionCounter;
+	// Check and change the colors of the bars
+
+	if (taskObject.difficulty === "Easy") {
+		changeDomColor(difficultyTextE, "greenBar");
+	} else if (taskObject.difficulty === "Medium") {
+		changeDomColor(difficultyTextE, "neutralBar");
+	} else if (taskObject.difficulty === "Hard") {
+		changeDomColor(difficultyTextE, "redBar");
+	}
+	checkInterruptionsCounter(taskObject.interruptionCounter);
 
 	// Manipulate the DOM to display the current task
 	taskNameDOM.innerHTML = taskObject.taskName;
@@ -79,6 +144,13 @@ export const openStudyMode = (key) => {
 	];
 	let counter = null;
 	let breakCounter = null;
+	checkElapsedDuration(
+		taskObject.estimatedMinutes,
+		taskObject.estimatedHours,
+		elapsedMinutes,
+		elapsedHours,
+		elapsedDurationE
+	);
 
 	// Check if pause button should be disabled
 	disableButton(isPauseDisabled, pauseButton);
@@ -99,6 +171,7 @@ export const openStudyMode = (key) => {
 	pauseButton.addEventListener("click", () => {
 		if (isRunning) {
 			clearInterval(counter);
+
 			taskObject.interruptionCounter++;
 			interruptionsCounterE.innerHTML =
 				taskObject.interruptionCounter.toString();
@@ -110,7 +183,7 @@ export const openStudyMode = (key) => {
 				"interruptionCounter",
 				taskObject.interruptionCounter
 			);
-
+			checkInterruptionsCounter(taskObject.interruptionCounter);
 			currentSessionCounter = 0;
 
 			isPauseDisabled = true;
@@ -220,6 +293,21 @@ export const openStudyMode = (key) => {
 				elapsedHours++;
 			}
 		}
+		checkElapsedDuration(
+			taskObject.estimatedMinutes,
+			taskObject.estimatedHours,
+			elapsedMinutes,
+			elapsedHours,
+			elapsedDurationE
+		);
+		// console.log(
+		// 	taskObject.estimatedMinutes,
+		// 	taskObject.estimatedHours,
+		// 	elapsedMinutes,
+		// 	elapsedHours
+		// );
+
+		// console.log(differenceInTiming);
 
 		// Created representative strings
 		// let h = elapsedHours < 10 ? "0" + elapsedHours : elapsedHours;
@@ -228,7 +316,7 @@ export const openStudyMode = (key) => {
 
 		elapsedDurationE.innerHTML = `${elapsedHours}:${elapsedM}:${elapsedS}`;
 		// let m = elapsedMinutes < 10 ? "0" + elapsedMinutes : elapsedMinutes;
-
+		check;
 		// elapsedDurationE.innerHTML = `${elapsedHours} hrs ${m} minutes ${seconds}`;
 
 		// Update elapsed duration
@@ -269,5 +357,86 @@ const disableButton = (isButtonDisabled, buttonElement) => {
 		buttonElement.disabled = false;
 		buttonElement.classList.remove("disabledButton");
 		// console.log("Button is enabled");
+	}
+};
+const changeDomColor = (element, className) => {
+	element.className = className;
+};
+
+// Needs to check whether the interruptions is > 5 > 10 and display color accordingly
+const checkInterruptionsCounter = (interruptionCounter) => {
+	if (interruptionCounter < 5) {
+		changeDomColor(interruptionsCounterE, "greenBar");
+	} else if (interruptionCounter >= 5 && interruptionCounter < 10) {
+		changeDomColor(interruptionsCounterE, "neutralBar");
+	} else if (interruptionCounter >= 10) {
+		changeDomColor(interruptionsCounterE, "redBar");
+	}
+};
+
+// This function compares the estimated duration with the elapsed duration and displays warning colours if the elapsed duration gets too high
+
+const checkElapsedDuration = (
+	estimatedM,
+	estimatedH,
+	elapsedM,
+	elapsedH,
+	element
+) => {
+	// console.log(estimatedH, estimatedM, elapsedM, elapsedH);
+	let difference;
+
+	let totalEstimatedM = parseInt(estimatedH) * 60 + parseInt(estimatedM);
+	let totalElapsedM = elapsedH * 60 + elapsedM;
+
+	difference = totalEstimatedM - totalElapsedM;
+	console.log(totalEstimatedM, totalElapsedM);
+	console.log(difference);
+	if (difference <= 0) {
+		changeDomColor(element, "neutralBar");
+		// if timing is 20 mins over it will turn red
+	} else if (difference <= -20) {
+		changeDomColor(element, "redBar");
+	}
+};
+
+const renderMaterials = (material, renderContainer) => {
+	let taskLabel;
+	if (material.pageRange !== null) {
+		taskLabel = `${material.materialName} <span class="pageRange">p.${material.pageRange}</span>`;
+	} else {
+		taskLabel = `${material.materialName}`;
+	}
+	let materialItem = document.createElement("li");
+	materialItem.innerHTML = `
+			<label for="${material.id}">
+				<input id="${material.id}" type="checkbox" class="strikeThrough">
+				<span>${taskLabel}</span>	
+			</label>
+			${
+				material.reference !== ""
+					? `<a href=${material.reference} target="_blank"><button>Open</button></a>`
+					: ""
+			}
+			
+	`;
+
+	renderContainer.appendChild(materialItem);
+};
+
+export const getAndRenderMaterials = (key) => {
+	if (key.slice(0, 5) === "Task:") {
+		let task = JSON.parse(localStorage.getItem(key));
+		// console.log(task.totalMaterials);
+		task.totalMaterials.forEach((material) => {
+			if (material.category === "PDF") {
+				console.log("Rendered PDF");
+				renderMaterials(material, pdfContainer);
+			} else if (material.category === "Article") {
+				renderMaterials(material, articleContainer);
+			} else if (material.category === "Book") {
+				renderMaterials(material, bookContainer);
+			}
+		});
 	}
 };

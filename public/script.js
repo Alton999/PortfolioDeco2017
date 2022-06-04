@@ -10,6 +10,9 @@ import "./components/studyMode";
 
 // Initialisations
 
+// Getting the task form to set display none when add button is clicked
+const addTaskModal = document.getElementById("addTaskForm");
+
 // Navigation buttons
 // const studyModeToggle = document.getElementById("studyModeToggle");
 const taskViewerToggle = document.getElementById("taskViewerToggle");
@@ -28,6 +31,7 @@ const addTaskForm = document.getElementById("taskForm");
 // const taskListContainer = document.getElementById("taskListNew");
 
 addTaskForm.addEventListener("submit", (e) => {
+	addTaskModal.style.display = "none";
 	// Add task input fields
 	e.preventDefault();
 	let taskNameInput = document.getElementById("taskName").value;
@@ -53,6 +57,8 @@ addTaskForm.addEventListener("submit", (e) => {
 		difficulty: difficultyInput,
 		subject: subjectInput,
 		estimatedDuration: hoursInput + " hrs  " + minutesInput + " minutes",
+		estimatedHours: hoursInput,
+		estimatedMinutes: minutesInput,
 		description: taskDescriptionInput,
 		taskStatus: "new",
 		elapsedHoursSaved: 0,
@@ -63,7 +69,8 @@ addTaskForm.addEventListener("submit", (e) => {
 		turnAround: null,
 		totalBreakMinutes: 0,
 		totalBreakHours: 0,
-		totalBreakSeconds: 0
+		totalBreakSeconds: 0,
+		totalMaterials: []
 	};
 
 	// Adds the task list array to the local storage object as a key and value pair

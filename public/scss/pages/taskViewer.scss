@@ -1,57 +1,57 @@
 //File for task viewer
 
 //Form styling
-#addTaskForm {
-	form {
-		padding: 0 120px 60px 120px;
-		box-sizing: border-box;
-	}
-	ul {
-		list-style-type: none;
-		padding: 0;
-	}
-	li,
-	li > ul {
-		display: flex;
-		align-items: center;
-		margin-bottom: 20px;
-	}
-
-	li > ul {
-		margin: 0;
-		display: flex;
-	}
-
-	li {
-		label,
-		p {
-			flex: 1 0 120px;
-			max-width: 200px;
-		}
-		input::-webkit-outer-spin-button,
-		input::-webkit-inner-spin-button {
-			-webkit-appearance: none;
-			margin: 0;
-		}
-		input,
-		select {
-			flex: 3 0 120px;
-			padding: 1em 2em;
-		}
-	}
-
-	// button container and styling
-	.submitContainer {
-		display: flex;
-		justify-content: flex-end;
-		button {
-			padding: 1em 2em;
-		}
-	}
-}
 
 // Task list styling
 #taskViewer {
+	#addTaskForm {
+		form {
+			padding: 0 120px 60px 120px;
+			box-sizing: border-box;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0;
+		}
+		li,
+		li > ul {
+			display: flex;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		li > ul {
+			margin: 0;
+			display: flex;
+		}
+
+		li {
+			label,
+			p {
+				flex: 1 0 120px;
+				max-width: 200px;
+			}
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+			input,
+			select {
+				flex: 3 0 120px;
+				padding: 1em 2em;
+			}
+		}
+
+		// button container and styling
+		.submitContainer {
+			display: flex;
+			justify-content: flex-end;
+			button {
+				padding: 1em 2em;
+			}
+		}
+	}
 	#tasksContainer {
 		display: flex;
 		justify-content: space-between;

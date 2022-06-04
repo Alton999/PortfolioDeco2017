@@ -2,7 +2,7 @@
 let addTaskModal = document.getElementById("addTaskForm");
 let addTaskModalOpen = document.getElementById("openNewTaskButton");
 
-let closeBtn = document.getElementsByClassName("close")[0];
+let closeBtn = document.getElementsByClassName("close")[1];
 
 addTaskModalOpen.onclick = () => {
 	addTaskModal.style.display = "block";

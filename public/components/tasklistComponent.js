@@ -16,17 +16,17 @@ const renderTask = (task, renderContainer) => {
 	// console.log("From render", allTasks);
 	// Every time the render tasks function is called we would want to loop over the array and display all values in our local storage
 	// console.log(task.difficulty);
-	const item = document.createElement("li");
+	let item = document.createElement("li");
 	item.setAttribute("data-id", task.id);
 	// Add the css class to the item container
 	item.classList.add("taskListItem");
 	// item.innerHTML = "<p>" + task.taskName + "</p>";
 
 	// Create task tags div
-	const taskTagsDiv = document.createElement("div");
+	let taskTagsDiv = document.createElement("div");
 	taskTagsDiv.className += "taskTags";
 	// Create task details container
-	const taskDetailsContainer = document.createElement("div");
+	let taskDetailsContainer = document.createElement("div");
 	taskDetailsContainer.classList.add("taskDetails");
 
 	// Manipulate the HTML structure of task details container to suit the needs of this list
@@ -53,12 +53,12 @@ const renderTask = (task, renderContainer) => {
 
 	// Creating the functionality for displaying the tags of priority and difficulty
 	// Create 2 spans to and check the value of each. add class name green, orange or red to change tag color
-	const difficultyTag = document.createElement("span");
-	const priorityTag = document.createElement("span");
+	let difficultyTag = document.createElement("span");
+	let priorityTag = document.createElement("span");
 
 	// Create the text node for the span
-	const difficultyTagText = document.createTextNode(task.difficulty);
-	const priorityTagText = document.createTextNode(task.priority);
+	let difficultyTagText = document.createTextNode(task.difficulty);
+	let priorityTagText = document.createTextNode(task.priority);
 
 	// Add initial class to spans
 	difficultyTag.classList.add("taskTag");

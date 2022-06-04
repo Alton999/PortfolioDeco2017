@@ -28,6 +28,92 @@
 						<p class="taskLabel">Date created: </p>
 						<p id="dateCreatedE"></p>
 					</section>
+
+					<section id="materialsListContainer">
+						<h2>Study materials list</h2>
+
+						<div id="materials-list">
+
+							<!-- PDF container -->
+							<hr>
+							<h3 class="materialType">PDFs</h3>
+							<div  class="materialItem">
+								<ul id="pdfContainer">
+									
+								</ul>
+								
+							</div>
+
+							<!-- Articles container -->
+							<hr>
+							<h3 class="materialType">Articles</h3>
+							<div  class="materialItem">
+								<ul id="articleContainer">
+									
+								</ul>
+							</div>
+
+							<!-- Book container -->
+							<hr>
+							<h3 class="materialType">Books</h3>
+							<div id="bookContainer" class="materialItem">
+								<ul id="bookContainer">
+									
+								</ul>
+							</div>
+							<hr>
+						</div>
+						<div class="buttonContainer">
+							<button id="addMaterial">Add Material</button>
+						</div>
+						<section id="addMaterialForm" class="modal">
+							<form id="materialForm" class="modal-content">
+								<div class="taskFormHeader">
+									<h4>Study Materials List Creator</h4>
+									<span class="close">&times;</span>
+								</div>
+								<ul>
+									<li>
+										<label for="category">Category:</label>
+										<select required name="category" id="category">
+											<option value="PDF">PDF</option>
+											<option value="Article">Article</option>
+											<option value="Book">Book</option>
+										</select>
+									</li>
+									<li>
+										<label for="materialName">Name:</label>
+										<input
+											type="text"
+											id="materialName"
+											placeholder="Name of resource"
+											
+											required
+										/>
+									</li>
+									<li>
+										<label for="description">Reference:</label>
+										<input
+											type="text"
+											id="materialReference"
+											placeholder="https://"
+										/>
+									</li>
+									<li>
+										<label for="pageRange">Page Range:</label>
+										<div class="inlineInput">
+											<input type="number" id="pageStart" placeholder="140">
+											-
+											<input type="number" id="pageEnd" placeholder="145">
+										</div>
+									</li>
+								</ul>
+								<div class="submitContainer">
+									<button type="submit">Add Task</button>
+								</div>
+							</form>
+						</section>
+					</section>
 					<!-- Header of each item -->
 					<section id="barHeader">
 						<div>
@@ -107,6 +193,8 @@
 						</ul>
 					</div>
 				</section>
+
+
 				<!-- Task modal to add a new task -->
 				<section id="addTaskForm" class="modal" >
 					<form id="taskForm" class="modal-content">
