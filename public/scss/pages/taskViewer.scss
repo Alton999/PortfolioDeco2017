@@ -60,6 +60,8 @@
 	// Ul ID for task list container
 	.taskCardsContainer {
 		// Open modal button styling
+		overflow: auto;
+		height: 82vh;
 		#openNewTaskButton {
 			padding: 15px 30px;
 			font-size: 16px;
