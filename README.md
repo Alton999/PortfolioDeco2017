@@ -105,5 +105,9 @@ This is the most important section as it tracks all the completed tasks and anal
 ##### Like every app, you have to be ensuring that you use this app to its potential and avoid cheating whenever possible to allow accurate tracking of your tasks, break habits and study durations.
 
 
+## References
+* Favicon icon - Free vector: Boy student sitting on stack of books with Laptop Flat Icon Illustration. Freepik. (2021, August 23). Retrieved June 5, 2022, from https://www.freepik.com/free-vector/boy-student-sitting-stack-books-with-laptop-flat-icon-illustration_17543960.htm#query=study%20icon&amp;position=6&amp;from_view=search 
+* HTML tables - HTML tables. (n.d.). Retrieved June 5, 2022, from https://www.w3schools.com/html/html_tables.asp 
+* Countdown timer -  Berhanu, Y., &amp; Jacques, N. (2020, June 1). Build a countdown timer in just 18 lines of JavaScript. SitePoint. Retrieved June 5, 2022, from https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/ 
+* Simple Stopwatch is a great JavaScript project for beginners. In this article you will learn how to make a stopwatch using JavaScript. (2022, April 26). Create a simple stopwatch using JavaScript (tutorial + code). Foolish Developer. Retrieved June 5, 2022, from https://www.foolishdeveloper.com/2021/10/simple-stopwatch-using-javascript.html 
 
-   
