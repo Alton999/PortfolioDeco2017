@@ -92,18 +92,6 @@ const renderTask = (task, renderContainer) => {
 	// Append the ctags into the tasktags div
 	item.appendChild(taskTagsDiv);
 	item.appendChild(taskDetailsContainer);
-
-	// Creating buttons container
-	// let buttonsContainer = document.createElement("div");
-	// buttonsContainer.className += "actionButtonContainer";
-
-	let studyButton = document.createElement("button");
-	let studyButtonText = document.createTextNode("Study Now");
-	studyButton.className += "studyButton";
-	studyButton.appendChild(studyButtonText);
-	item.append(studyButton);
-	// buttonsContainer.appendChild(studyButton);
-
 	// Creating a delete button associated with specific task
 	let delButton = document.createElement("button");
 	let delButtonText = document.createTextNode("Delete Task");
@@ -111,8 +99,23 @@ const renderTask = (task, renderContainer) => {
 
 	delButton.appendChild(delButtonText);
 	// buttonsContainer.appendChild(delButton);
-	item.append(delButton);
+	// Creating buttons container
+	// let buttonsContainer = document.createElement("div");
+	// buttonsContainer.className += "actionButtonContainer";
+	let studyButton = document.createElement("button");
+	let studyButtonText = document.createTextNode("Study Now");
+	studyButton.className += "studyButton";
+	studyButton.appendChild(studyButtonText);
 
+	if (task.taskStatus !== "Completed") {
+		console.log("This is a completed task");
+		item.append(studyButton);
+	} else {
+		delButton.className += " fullWidth";
+	}
+	// buttonsContainer.appendChild(studyButton);
+
+	item.append(delButton);
 	// // Event listener for additional dom elements
 	delButton.addEventListener("click", (e) => {
 		e.preventDefault();

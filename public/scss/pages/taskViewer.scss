@@ -20,8 +20,8 @@
 			margin-bottom: 20px;
 		}
 
-		li > ul {
-			margin: 0;
+		li > ul > li {
+			margin: 0 10px 0 0;
 			display: flex;
 		}
 
@@ -30,6 +30,7 @@
 			p {
 				flex: 1 0 120px;
 				max-width: 200px;
+				margin: 0;
 			}
 			input::-webkit-outer-spin-button,
 			input::-webkit-inner-spin-button {
@@ -38,7 +39,7 @@
 			}
 			input,
 			select {
-				flex: 3 0 120px;
+				flex: 1 0 110px;
 				padding: 1em 2em;
 			}
 		}
@@ -59,7 +60,7 @@
 	// Ul ID for task list container
 	.taskCardsContainer {
 		// Open modal button styling
-		button {
+		#openNewTaskButton {
 			padding: 15px 30px;
 			font-size: 16px;
 			font-weight: 600;
@@ -141,11 +142,13 @@
 				border-radius: 5px;
 				width: 50%;
 				transition: 0.5s;
+				padding: 15px 30px;
+				font-size: 16px;
 			}
 			.delButton {
 				color: #c0392b;
-				margin-left: 10%;
-				width: 40%;
+				margin-left: 17%;
+				width: 30%;
 				&:hover {
 					background-color: #c0392b;
 					color: white;
@@ -162,6 +165,11 @@
 				margin: 30px auto;
 				padding: 30px 30px 15px 30px;
 				border-radius: 15px;
+				.delButton.fullWidth {
+					width: 100%;
+					margin: 10px 0 0 0;
+					padding: 10px 15px;
+				}
 				.taskTags {
 					height: 100%;
 					margin-bottom: 15px;
@@ -194,6 +202,137 @@
 						flex: 1 0 30px;
 						max-width: 160px;
 					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	main {
+		padding: 0;
+	}
+	#taskViewer {
+		#addTaskForm {
+			.submitContainer {
+				button {
+					padding: 0.5em 1em;
+				}
+			}
+			.taskFormHeader {
+				font-size: 0.6em;
+			}
+			form {
+				padding: 0 1em;
+				box-sizing: border-box;
+			}
+
+			li > ul {
+				margin: 0;
+				display: flex;
+			}
+
+			li {
+				label,
+				p {
+					max-width: 170px;
+					font-size: 0.8em;
+					// flex-wrap: wrap;
+				}
+
+				input,
+				select {
+					padding: 0.5em 0.8em;
+					font-size: 0.8em;
+				}
+			}
+		}
+		padding: 0;
+		h1 {
+			display: none;
+			text-align: center;
+		}
+		#tasksContainer {
+			flex-direction: column;
+		}
+
+		.taskCardsContainer {
+			width: 100%;
+			min-height: 32vh;
+			max-height: 40vh;
+			border-radius: 0;
+			.taskContainerHeader > h3 {
+				padding: 0.8em 1em;
+			}
+			#openNewTaskButton {
+				padding: 5px 10px;
+				font-size: 12px;
+			}
+			#taskListNew::-webkit-scrollbar,
+			#taskListProgress::-webkit-scrollbar,
+			#taskListCompleted::-webkit-scrollbar {
+				display: none;
+			}
+
+			#taskListNew,
+			#taskListProgress,
+			#taskListCompleted {
+				white-space: nowrap;
+				// position: relative;
+				overflow-x: scroll;
+				overflow-y: hidden;
+				-webkit-overflow-scrolling: touch;
+				margin: auto 0;
+				// display: flex;
+				// align-items: center;
+				height: 100%;
+				button {
+					margin-top: 5px;
+					padding: 10px 10px;
+					font-size: 0.8em;
+					font-weight: 700;
+				}
+				// .delButton {
+				// 	padding: 5px 10px;
+				// }
+
+				.taskListItem {
+					border-radius: 0;
+					margin: 5px 20px 5px 5px;
+					&:first-child {
+						margin: 5px 5px 5px 20px;
+					}
+					padding: 8px 20px;
+					display: inline-block;
+					.taskDetails > ul > li {
+						line-height: 0.2;
+						p {
+							font-size: 12px;
+						}
+						.label {
+							font-weight: 600;
+							flex: 1 0 30px;
+							max-width: 160px;
+						}
+					}
+					.taskTags {
+						margin-bottom: 5px;
+						span {
+							padding: 2px 20px;
+							border-radius: 0;
+							font-size: 0.7em;
+						}
+					}
+				}
+			}
+
+			.taskContainerHeader {
+				text-align: center;
+				h3 {
+					font-size: 1em;
+				}
+				hr {
+					height: 6px;
 				}
 			}
 		}

@@ -8,7 +8,7 @@ const tracker = document.getElementById("flowTimeTracker");
 const table = document.getElementById("trackerTable");
 
 export const openTracker = () => {
-	Navigation.navigateToPage(taskViewer, tracker);
+	Navigation.navigateToPage(taskViewer, tracker, "notFlex");
 	studyModeContainer.style.display = "none";
 	for (const key in localStorage) {
 		getAndRenderAnalytics(key);
@@ -63,23 +63,23 @@ const renderTableRow = (task) => {
 	console.log(flowEff);
 	const tableRow = document.createElement("tr");
 	tableRow.innerHTML = `
-		<td>${task.createdDate}</td>
-		<td>${task.completedDate}</td>
-		<td>${task.turnAround}</td>
-		<td>${task.taskName}</td>
-		<td>${task.subject}</td>
-		<td>${produceTimeString(
+		<td data-label="Task">${task.taskName}</td>
+		<td data-label="Created Date">${task.createdDate}</td>
+		<td data-label="Completed Date">${task.completedDate}</td>
+		<td data-label="Turnaround">${task.turnAround}</td>
+		<td data-label="Subject">${task.subject}</td>
+		<td data-label="Total Duration">${produceTimeString(
 			task.elapsedSecondsSaved,
 			task.elapsedMinutesSaved,
 			task.elapsedHoursSaved
 		)}</td>
-		<td>${task.interruptionCounter}</td>
-		<td>${produceTimeString(
+		<td data-label="Break Counter">${task.interruptionCounter}</td>
+		<td data-label="Total Break Duration">${produceTimeString(
 			task.totalBreakSeconds,
 			task.totalBreakMinutes,
 			task.totalBreakHours
 		)}</td>
-		<td class="flowEff">${flowEff}%</td>
+		<td data-label="Flow Efficiency" class="flowEff">${flowEff}%</td>
 	`;
 
 	table.appendChild(tableRow);

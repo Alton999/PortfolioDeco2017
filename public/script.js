@@ -1,8 +1,8 @@
 import * as TaskList from "./components/tasklistComponent";
 
-import * as Navigation from "./components/navigation";
+// import * as Navigation from "./components/navigation";
 
-import * as Tracker from "./components/flowTimeTracker";
+// import * as Tracker from "./components/flowTimeTracker";
 
 import "./components/studyMode";
 
@@ -15,13 +15,11 @@ const addTaskModal = document.getElementById("addTaskForm");
 
 // Navigation buttons
 // const studyModeToggle = document.getElementById("studyModeToggle");
-const taskViewerToggle = document.getElementById("taskViewerToggle");
-const flowTimeTrackerToggle = document.getElementById("flowTimeTrackerToggle");
 
 // Task study mode components
-const studyModeContainer = document.getElementById("studyMode");
-const tracker = document.getElementById("flowTimeTracker");
-const taskViewer = document.getElementById("taskViewer");
+// const studyModeContainer = document.getElementById("studyMode");
+// const tracker = document.getElementById("flowTimeTracker");
+// const taskViewer = document.getElementById("taskViewer");
 
 // Add task form
 const addTaskForm = document.getElementById("taskForm");
@@ -56,7 +54,7 @@ addTaskForm.addEventListener("submit", (e) => {
 		priority: priorityInput,
 		difficulty: difficultyInput,
 		subject: subjectInput,
-		estimatedDuration: hoursInput + " hrs  " + minutesInput + " minutes",
+		estimatedDuration: hoursInput + " hrs  " + minutesInput + " mins",
 		estimatedHours: hoursInput,
 		estimatedMinutes: minutesInput,
 		description: taskDescriptionInput,
@@ -81,12 +79,6 @@ addTaskForm.addEventListener("submit", (e) => {
 	addTaskForm.reset();
 });
 
-// Set initially study mode to not appear
-studyModeContainer.style.display = "none";
-
-// Set initially for task tracker to not appear
-tracker.style.display = "none";
-
 // Add event listener for navigation buttons is here
 // studyModeToggle.addEventListener("click", (e) => {
 // 	e.preventDefault();
@@ -94,17 +86,17 @@ tracker.style.display = "none";
 // 	tracker.style.display = "none";
 // });
 
-taskViewerToggle.addEventListener("click", (e) => {
-	e.preventDefault();
-	Navigation.navigateToPage(studyModeContainer, taskViewer);
-	tracker.style.display = "none";
-	location.reload();
-});
+// taskViewerToggle.addEventListener("click", (e) => {
+// 	e.preventDefault();
+// 	Navigation.navigateToPage(studyModeContainer, taskViewer);
+// 	tracker.style.display = "none";
+// 	location.reload();
+// });
 
-flowTimeTrackerToggle.addEventListener("click", (e) => {
-	e.preventDefault();
+// flowTimeTrackerToggle.addEventListener("click", (e) => {
+// 	e.preventDefault();
 
-	if (tracker.style.display === "none") {
-		Tracker.openTracker();
-	}
-});
+// 	if (tracker.style.display === "none") {
+// 		Tracker.openTracker();
+// 	}
+// });

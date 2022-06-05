@@ -4,116 +4,120 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>StudBud</title>
+		<link rel="icon"  href="./assets/favicon.ico">
 		<link href="scss/main.scss" rel="stylesheet" type="text/css" />
 	</head>
 
 	<body>
 		<main>
 			<!-- <button id="studyModeToggle">Study Mode</button> -->
-			<button id="taskViewerToggle">Task Viewer Mode</button>
-			<button id="flowTimeTrackerToggle">Flow Time Tracker</button>
+			<section id="navigationContainer">
+				<button id="taskViewerToggle" class="active">Task Viewer Mode</button>
+				<button id="flowTimeTrackerToggle">Flow Time Tracker</button>
+			</section>
+
 			<section id="studyMode">
 				<h1>Study Mode</h1>
 				<!-- Bar containing details of task selected -->
 				<section class="container">
-					<section class="headerContainer">
-						<p class="taskLabel">Task: </p>
-						<p id="taskNameDOM"></p>
-					</section>
-					<section class="headerContainer">
-						<p class="taskLabel">Subject: </p>
-						<p id="subjectE"></p>
-					</section>
-					<section class="headerContainer">
-						<p class="taskLabel">Date created: </p>
-						<p id="dateCreatedE"></p>
-					</section>
-
-					<section id="materialsListContainer">
-						<h2>Study materials list</h2>
-
-						<div id="materials-list">
-
-							<!-- PDF container -->
-							<hr>
-							<h3 class="materialType">PDFs</h3>
-							<div  class="materialItem">
-								<ul id="pdfContainer">
-									
-								</ul>
-								
-							</div>
-
-							<!-- Articles container -->
-							<hr>
-							<h3 class="materialType">Articles</h3>
-							<div  class="materialItem">
-								<ul id="articleContainer">
-									
-								</ul>
-							</div>
-
-							<!-- Book container -->
-							<hr>
-							<h3 class="materialType">Books</h3>
-							<div id="bookContainer" class="materialItem">
-								<ul id="bookContainer">
-									
-								</ul>
-							</div>
-							<hr>
-						</div>
-						<div class="buttonContainer">
-							<button id="addMaterial">Add Material</button>
-						</div>
-						<section id="addMaterialForm" class="modal">
-							<form id="materialForm" class="modal-content">
-								<div class="taskFormHeader">
-									<h4>Study Materials List Creator</h4>
-									<span class="close">&times;</span>
-								</div>
-								<ul>
-									<li>
-										<label for="category">Category:</label>
-										<select required name="category" id="category">
-											<option value="PDF">PDF</option>
-											<option value="Article">Article</option>
-											<option value="Book">Book</option>
-										</select>
-									</li>
-									<li>
-										<label for="materialName">Name:</label>
-										<input
-											type="text"
-											id="materialName"
-											placeholder="Name of resource"
-											
-											required
-										/>
-									</li>
-									<li>
-										<label for="description">Reference:</label>
-										<input
-											type="text"
-											id="materialReference"
-											placeholder="https://"
-										/>
-									</li>
-									<li>
-										<label for="pageRange">Page Range:</label>
-										<div class="inlineInput">
-											<input type="number" id="pageStart" placeholder="140">
-											-
-											<input type="number" id="pageEnd" placeholder="145">
-										</div>
-									</li>
-								</ul>
-								<div class="submitContainer">
-									<button type="submit">Add Task</button>
-								</div>
-							</form>
+					<section class="studyDetailsContainer">
+						<section class="headerContainer">
+							<p class="taskLabel">Task: </p>
+							<p id="taskNameDOM"></p>
 						</section>
+						<section class="headerContainer">
+							<p class="taskLabel">Subject: </p>
+							<p id="subjectE"></p>
+						</section>
+						<section class="headerContainer">
+							<p class="taskLabel">Date created: </p>
+							<p id="dateCreatedE"></p>
+						</section>
+
+					 	<section id="materialListFullContainer">
+							 <h2 id="studyMaterialsContainerHeader">Study Materials List</h2>
+							 <section id="materialsListContainer">
+								 <div id="materials-list">
+									 <!-- PDF container -->
+									 <h3 class="materialType">PDFs</h3>
+									 <div  class="materialItem">
+										 <ul id="pdfContainer">
+										 </ul>
+										 
+									 </div>
+		 
+									 <!-- Articles container -->
+									 <hr>
+									 <h3 class="materialType">Articles</h3>
+									 <div  class="materialItem">
+										 <ul id="articleContainer">
+										 </ul>
+									 </div>
+		 
+									 <!-- Book container -->
+									 <hr>
+									 <h3 class="materialType">Books</h3>
+									 <div id="bookContainer" class="materialItem">
+										 <ul id="bookContainer">
+										 </ul>
+									 </div>
+								 </div>
+								 <div class="buttonContainer">
+									 <button id="addMaterial">Add Material</button>
+								 </div>
+								 <section id="addMaterialForm" class="modal">
+									 <form id="materialForm" class="modal-content">
+										 <div class="taskFormHeader">
+											 <h4>Study Materials List Creator</h4>
+											 <span class="close">&times;</span>
+										 </div>
+										 <ul>
+											 <li>
+												 <label for="category">Category:</label>
+												 <select required name="category" id="category">
+													 <option value="PDF">PDF</option>
+													 <option value="Article">Article</option>
+													 <option value="Book">Book</option>
+												 </select>
+											 </li>
+											 <li>
+												 <label for="materialName">Name:</label>
+												 <input
+													 type="text"
+													 id="materialName"
+													 placeholder="Name of resource"
+													 
+													 required
+												 />
+											 </li>
+											 <li>
+												 <label for="description">Reference:</label>
+												 <input
+													 type="text"
+													 id="materialReference"
+													 placeholder="https://"
+												 />
+											 </li>
+											 <li>
+												 <label for="pageRange">Page Range:</label>
+												 <div class="inlineInput">
+													 <input type="number" id="pageStart" placeholder="140">
+													 -
+													 <input type="number" id="pageEnd" placeholder="145">
+												 </div>
+											 </li>
+										 </ul>
+										 <div class="submitContainer">
+											 <button type="submit">Add Task</button>
+										 </div>
+									 </form>
+								 </section>
+							 </section>
+						 </section>
 					</section>
+					
+
+					
 					<!-- Header of each item -->
 					<section id="barHeader">
 						<div>
@@ -149,7 +153,7 @@
 				</section>
 
 				<!-- Container containing buttons -->
-				<section class="container actionButtonContainer">
+				<section class="actionButtonContainer">
 					<button id="startSession">Start Session</button>
 					<button id="pauseSession">Pause Session</button>
 					<button id="endSession">Finish Task</button>
@@ -169,7 +173,7 @@
 						</div>
 
 						<ul id="taskListNew">
-							<p id="emptyListText">You do not currently have any new tasks. Feel free to create one.</p>
+							<p id="emptyListText">You do not currently have any new tasks. </p>
 							<!-- Individual task card -->
 						</ul>
 						<button id="openNewTaskButton">Add New Task</button>
@@ -209,7 +213,7 @@
 									type="text"
 									id="taskName"
 									placeholder="Enter the task name"
-									maxlength="40"
+									maxlength="30"
 									required
 								/>
 							</li>
@@ -250,7 +254,6 @@
 											min="0"
 											max="24"
 											placeholder="Hrs"
-											required
 										/>
 									</li>
 									<li>
@@ -284,13 +287,13 @@
 			<section id="flowTimeTracker">
 				<h1>Flow Time Tracker</h1>
 				
-				<section id="trackerContainer">
+				<section id="trackerContainer" >
 					<table id="trackerTable">
 						<tr>
+							<th>Task:</th>
 							<th>Created Date:</th>
 							<th>Completed Date:</th>
-							<th>Turnover:</th>
-							<th>Task:</th>
+							<th>Turnaround:</th>
 							<th>Subject:</th>
 							<th>Total Duration:</th>
 							<th>Break counter:</th>

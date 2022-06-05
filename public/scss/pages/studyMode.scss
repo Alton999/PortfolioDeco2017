@@ -1,4 +1,8 @@
 #studyMode {
+	// display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	// Materials list
 	#addMaterialForm {
 		form {
@@ -61,102 +65,115 @@
 	// background-color: bisque;
 	.container {
 		width: 80%;
-		display: flex;
-		flex-direction: column;
+		.studyDetailsContainer {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		#materialListFullContainer {
+			width: 50%;
 
-		#materialsListContainer {
-			margin-top: 1.5em;
-			width: 60%;
-			border: 2px solid gray;
-			padding: 1.5em;
-			border-radius: 10px;
-			box-shadow: 3px;
-			.buttonContainer {
-				display: flex;
-				align-items: center;
-				justify-content: flex-end;
-				button {
-					margin: 1em 0;
-					padding: 1em 1.5em;
-					border-radius: 5px;
-				}
-			}
 			h2 {
-				font-size: 1.7em;
-				margin: 0 0 15px 0;
+				margin-top: 1.5em;
+				margin-bottom: 0;
+				font-size: 1.3em;
+				font-weight: 700;
+				background-color: rgba(142, 68, 173, 1);
+				border-radius: 10px 10px 0 0;
+				text-align: center;
+				padding: 1.2em 0;
+				color: white;
 			}
-
-			#materials-list {
-				overflow: auto;
-				min-height: 30vh;
-				max-height: 50vh;
-				h3 {
-					font-size: 1.5em;
-					font-weight: 700;
-					// margin-bottom: 10px;
-					margin-top: 40px;
-					text-align: center;
-				}
-				div {
+			#materialsListContainer {
+				border: 2px solid gray;
+				padding: 0 1em;
+				// padding: 1.5em;
+				border-radius: 0 0 10px 10px;
+				// box-shadow: 3px;
+				.buttonContainer {
 					display: flex;
 					align-items: center;
-					font-size: 1.2em;
-					// margin: 20px 0;
-
-					input {
-						width: 15px;
-						height: 15px;
-						margin-right: 10px;
+					justify-content: flex-end;
+					button {
+						margin: 1em 0;
+						padding: 1em 1.5em;
+						border-radius: 5px;
 					}
+				}
 
-					ul {
-						padding: 0;
+				#materials-list {
+					overflow: auto;
+					min-height: 30vh;
+					max-height: 50vh;
+					h3 {
+						font-size: 1em;
+						font-weight: 700;
+						// margin-bottom: 10px;
+						margin-top: 40px;
+						text-align: center;
+					}
+					div {
+						display: flex;
+						align-items: center;
+						font-size: 0.8em;
+						// margin: 20px 0;
 
-						list-style-type: none;
-						width: 100%;
-						li {
-							margin: 8px 0;
-							padding: 10px 0 10px 35px;
-							display: flex;
-							justify-content: space-between;
-							align-items: center;
-							font-size: 1em;
+						input {
+							width: 15px;
+							height: 15px;
+							margin-right: 10px;
+						}
 
-							button {
-								background: none;
-								margin-left: 20px;
-								padding: 15px 20px;
-								font-size: 1em;
-								border: 3px solid rgb(142, 68, 173, 0.3);
-								color: rgb(142, 68, 173, 1);
-								cursor: pointer;
-								// background-color: rgba(39, 174, 96, 0.3);
-								font-weight: 700;
-								border-radius: 5px;
-								transition-duration: 0.4s;
-								// flex: 1;
-								&:hover {
-									color: white;
-									background-color: rgb(142, 68, 173, 1);
+						ul {
+							padding: 0;
+							margin: 0;
+							list-style-type: none;
+							width: 100%;
+							li {
+								// margin: 8px 0;
+								padding: 10px 0 10px 35px;
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								font-size: 1.2em;
+
+								button {
+									background: none;
+									margin-left: 20px;
+									padding: 10px 15px;
+									font-size: 1em;
+									border: 3px solid rgb(142, 68, 173, 0.3);
+									color: rgb(142, 68, 173, 1);
+									cursor: pointer;
+									// background-color: rgba(39, 174, 96, 0.3);
+									font-weight: 700;
+									border-radius: 5px;
+									transition-duration: 0.4s;
+									// flex: 1;
+									&:hover {
+										color: white;
+										background-color: rgb(142, 68, 173, 1);
+									}
 								}
 							}
+							li:nth-child(even) {
+								background-color: rgb(173, 216, 230, 0.3);
+							}
+							.pageRange {
+								margin-left: 5px;
+								font-weight: 700;
+								color: rgb(78, 78, 78);
+							}
 						}
-						li:nth-child(even) {
-							background-color: rgb(173, 216, 230, 0.3);
+						input[type="checkbox"] {
+							display: none;
 						}
-						.pageRange {
-							margin-left: 5px;
-							font-weight: 700;
-							color: rgb(78, 78, 78);
+						input[type="checkbox"]:checked + span {
+							text-decoration: line-through;
+							color: gray;
+							// box-shadow: 0 0 0 3px hotpink;
 						}
-					}
-					input[type="checkbox"] {
-						display: none;
-					}
-					input[type="checkbox"]:checked + span {
-						text-decoration: line-through;
-						color: gray;
-						// box-shadow: 0 0 0 3px hotpink;
 					}
 				}
 			}
@@ -166,7 +183,7 @@
 		.headerContainer {
 			display: flex;
 			flex-direction: row;
-			font-size: 1.3em;
+			font-size: 1.7em;
 			height: 50px;
 			.taskLabel {
 				font-weight: 600;
@@ -177,6 +194,7 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: space-around;
+
 			margin-top: 60px;
 			div {
 				width: 20%;
@@ -194,6 +212,7 @@
 			// align-items: center;
 			justify-content: space-around;
 			height: 50px;
+			font-size: 1.3em;
 			div {
 				transition-duration: 0.4s;
 				display: flex;
@@ -222,6 +241,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		width: 80%;
 		button {
 			cursor: pointer;
 			width: 30%;
@@ -271,6 +291,113 @@
 			pointer-events: none;
 			color: black;
 			background-color: lightgray;
+		}
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	#studyMode {
+		width: 90%;
+		margin: auto;
+		height: 90vh;
+
+		h1 {
+			font-size: 2.5em;
+		}
+		font-size: 0.7em;
+		.actionButtonContainer {
+			display: flex;
+			width: 100%;
+			margin-top: 1.25em;
+			flex-direction: row;
+			justify-content: space-between;
+			button {
+				width: 30%;
+				padding: 10px 20px;
+				font-size: 16px;
+			}
+		}
+		.container {
+			display: block;
+
+			#barHeader div,
+			#barContents div {
+				font-size: 0.7em;
+				// flex-wrap: wrap;
+			}
+
+			width: 100%;
+			#barHeader {
+				margin-top: 20px;
+			}
+			#materialListFullContainer {
+				width: 100%;
+				h2 {
+					padding: 0.8em 0;
+				}
+				#materialsListContainer {
+					#materials-list {
+						h3 {
+							font-size: 1.4em;
+						}
+						div {
+							ul {
+								font-size: 1.3em;
+								li {
+									padding: 0;
+									button {
+										border: none;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			.studyDetailsContainer {
+				.headerContainer:nth-child(n + 2) {
+					display: none;
+				}
+			}
+		}
+		// Materials list
+		#addMaterialForm {
+			.submitContainer {
+				button {
+					padding: 0.5em 1em;
+				}
+			}
+			.taskFormHeader {
+				font-size: 0.6em;
+			}
+			form {
+				padding: 0 1em;
+				box-sizing: border-box;
+			}
+
+			li > ul {
+				margin: 0;
+				display: flex;
+			}
+
+			li {
+				label,
+				p {
+					max-width: 100px;
+					font-size: 1em;
+					// flex-wrap: wrap;
+				}
+
+				input,
+				select {
+					padding: 0.5em 0.8em;
+					font-size: 1em;
+				}
+
+				input[type="number"] {
+					max-width: 106px;
+				}
+			}
 		}
 	}
 }

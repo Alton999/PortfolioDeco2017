@@ -81,7 +81,7 @@ export const openStudyMode = (key) => {
 		materialsForm.reset();
 	});
 
-	Navigation.navigateToPage(taskViewer, studyModeContainer);
+	Navigation.navigateToPage(taskViewer, studyModeContainer, "flex");
 
 	// Create a is running variable to check if its running to disable the pause button
 	let isRunning = false;
