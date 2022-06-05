@@ -7,6 +7,12 @@ Through the two rounds of user testing it was highlighted that there should be m
 2. Kanban functionality has been changed to become automatic. There is clear incentive to automate this task tracker as it keeps the structure rigid. Storing and rendering the tasks as their states was a more effective way of storing the tasks. Moving the tasks automatically allows the users to not have to worry about placing them in the wrong place as that is simply automated.
 3. The colours throughout the app was used in accordance to strict design principles. For example green clearly means a go to button like the study now and navigation. Red shows clear warnings for example the delete button. Similar to this the study mode colour effects mean the same thing the colours go from calm to warm to hot showing clear indications of warnings for the user.
 
+## Future improvements
+There are clear areas for improvements during the development phase. <br>
+
+* One of which is the scalability of this application. Once you get to a certain amount of tasks stored up in the task list it gets extremely hard to locate and navigate through the sea of tasks.
+* The analytics component can be greatly improved in terms of the mobile layout but also the readability of it. It would be also beneficial to have a filter functionality to allow users to navigate through a large list of items.
+* Another major improvement would be to use accounts and servers over local storage. Local storage has major limitations regarding security and loss of data when cookies are cleared. Would not be beneficial if users want to use for long term habit tracking.
 
 ## Improvements and iterations
 User testing and evaluations were conducted to evaluate the usability and desirability of this application. 5 initial testing was done for the mockup stages which involved users going through a think aloud protocol and asking them to use the application without guidance. This ensures that each step of the application is simple for the users to navigate. During the completion phases of the application another 5 think aloud protocols were conducted to gain insights on the usability of the developed prototype application. This ensures all the logic is being handled but also tests for different error handling methods to ensure users don't use this application in the wrong way.
@@ -55,7 +61,7 @@ The key issue throughout the initial mockups is simplicity. The idea of the appl
 ### Analytics 
 <p float="left">
   <img src="https://github.com/Alton999/StudBud2022/blob/master/README/flowTrackerMockup.png" width="40%" />
-  <img src="https://github.com/Alton999/StudBud2022/blob/master/README/flowTrackerMockupMobile.png" width="40%" />
+  <img src="https://github.com/Alton999/StudBud2022/blob/master/README/flowTrackerMobileMockup.png" width="40%" />
 </p>
 <p float="left">
   <img src="https://github.com/Alton999/StudBud2022/blob/master/README/flowTrackerDevMobile.png" width="40%" />
