@@ -5,7 +5,7 @@
 There is three main components to this application: Study mode, task view mode and analytics
 
 #### Task view mode
-<img src="https://github.com/Alton999/StudBud2022/blob/master/README/taskViewer.png" width="1000px" align="center">
+<img src="https://github.com/Alton999/StudBud2022/blob/master/README/taskViewer.png" width="100%" align="center">
 
 This mode has three different sections to preview your pending tasks, in progress tasks and also your completed tasks. In the new tasks section you can add a new task using the add new task button which will open the following modal.
 
@@ -14,7 +14,7 @@ After filling out the required information you can proceed to add a task. (Only 
 
 After adding a task in both the new tasks container and in progress container each task has 2 buttons, study now or delete. In the study now you can open the study mode component and passing the information to the study mode component. The completed tasks should not have this button but you are able to delete the selected button. Clicking on the study mode button will open the study mode component for that specific task.
 
-<img src="https://github.com/Alton999/StudBud2022/blob/master/README/studyMode.png" width="1000px" align="center">
+<img src="https://github.com/Alton999/StudBud2022/blob/master/README/studyMode.png" width="100%" align="center">
 This is where the main functionality is.  
 
 ##### Study mode functionality
@@ -29,6 +29,11 @@ This is where the main functionality is.
 * Once you are finished with the task you can complete the task with the finish task button which will push the information collecting during your study session into the analytics section
 
 ##### Task analytics section
-<img src="https://github.com/Alton999/StudBud2022/blob/master/README/taskAnalytics.png" width="1000px" align="center">
+<img src="https://github.com/Alton999/StudBud2022/blob/master/README/taskAnalytics.png" width="100%" align="center">
+This is the most important section as it tracks all the completed tasks and analyses the task and shows your flow efficiency. This is calculated by taking the amountof breaks and break duration and finding the percentage in which you worked and rested. This shows which subjects you struggle to focus and which subjects you excel in focusing and engaging in the flow.
+
+##### Like every app, you have to be ensuring that you use this app to its potential and avoid cheating whenever possible to allow accurate tracking of your tasks, break habits and study durations.
+
+
 
    
