@@ -3,6 +3,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	height: 90vh;
 	// Materials list
 	#addMaterialForm {
 		form {
@@ -68,7 +69,7 @@
 		.studyDetailsContainer {
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
+			// justify-content: center;
 			align-items: center;
 		}
 		#materialListFullContainer {
@@ -183,7 +184,7 @@
 		.headerContainer {
 			display: flex;
 			flex-direction: row;
-			font-size: 1.7em;
+			font-size: 1.3em;
 			height: 50px;
 			.taskLabel {
 				font-weight: 600;
