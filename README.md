@@ -1,5 +1,19 @@
 # StudBud2022
 
+## Improvements and iterations
+User testing and evaluations were conducted to evaluate the usability and desirability of this application. 5 initial testing was done for the mockup stages which involved users going through a think aloud protocol and asking them to use the application without guidance. This ensures that each step of the application is simple for the users to navigate. During the completion phases of the application another 5 think aloud protocols were conducted to gain insights on the usability of the developed prototype application. This ensures all the logic is being handled but also tests for different error handling methods to ensure users don't use this application in the wrong way.
+
+### Navigation
+After initial testing phase of the mockups it was noted that the navigation was unnecessarily big and takes too much space on the page. It was also noted that the icons are not needed and adds clutter to the page. During testing and development it was noted that the study mode button in the navigation bar would not be necessary as you should only be able to enter the page through the study button on each task list. 
+
+<p float="left">
+  <img src="https://github.com/Alton999/StudBud2022/blob/master/README/navigationMockups" width="40%" />
+  <img src="https://github.com/Alton999/StudBud2022/tree/master/README/navigationDevelopment" width="40%" /> 
+</p>
+
+
+
+
 ## Documentation
 
 There is three main components to this application: Study mode, task view mode and analytics
