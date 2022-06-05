@@ -7,8 +7,8 @@ User testing and evaluations were conducted to evaluate the usability and desira
 After initial testing phase of the mockups it was noted that the navigation was unnecessarily big and takes too much space on the page. It was also noted that the icons are not needed and adds clutter to the page. During testing and development it was noted that the study mode button in the navigation bar would not be necessary as you should only be able to enter the page through the study button on each task list. 
 
 <p float="left">
-  <img src="https://github.com/Alton999/StudBud2022/blob/master/README/navigationMockups" width="40%" />
-  <img src="https://github.com/Alton999/StudBud2022/tree/master/README/navigationDevelopment" width="40%" /> 
+  <img src="https://github.com/Alton999/StudBud2022/blob/master/README/navigationMockups.png" width="40%" />
+  <img src="https://github.com/Alton999/StudBud2022/tree/master/README/navigationDevelopment.png" width="40%" /> 
 </p>
 
 
